@@ -13,7 +13,7 @@ public final class ImageUtils {
 	private ImageUtils(){}
 	
 	public static BufferedImage read(File file) {
-		BufferedImage image = null;
+		BufferedImage image;
 		try {
 			image = ImageIO.read(file);
 		} catch (IOException e) {

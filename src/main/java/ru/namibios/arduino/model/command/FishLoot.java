@@ -39,11 +39,9 @@ public class FishLoot implements Command{
 
         Rectangle[] rectangles = Application.getInstance().LOOT_SLOT_LIST();
 
-        List<Screen> collect = Arrays.stream(rectangles)
-                .map(this::toScreen)
-                .collect(Collectors.toList());
-
-        this.screens = new ArrayList<>(collect);
+		this.screens = Arrays.stream(rectangles)
+				.map(this::toScreen)
+				.collect(Collectors.toList());
 
 	}
 
@@ -61,8 +59,9 @@ public class FishLoot implements Command{
     }
 
     private String[] getLootIndices() {
-		String loots = "";
+		StringBuilder loots = new StringBuilder();
 		for (Screen screen : screens) {
+
 			ImageParser imageParser = new ImageParser(screen, Loot.values());
 			imageParser.parse(Screen.GRAY);
 
@@ -76,12 +75,12 @@ public class FishLoot implements Command{
 				}
 			}
 
-			loots+= key;
+			loots.append(key);
 
 		}
 
 		LOG.debug("Loot indexes: " + loots);
-		return loots.split(",");
+		return loots.toString().split(",");
 	}
 
 	private void saveLoot(String[] arrayLoots){

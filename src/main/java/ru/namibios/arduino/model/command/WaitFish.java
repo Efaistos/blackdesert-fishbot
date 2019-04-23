@@ -52,8 +52,6 @@ public class WaitFish implements Command{
             screen.saveImage(Path.DEBUG_WAITFISH);
         }
 
-//		MatrixUtils.printMatrix(imageParser.getImageMatrix(), "0");
-
 		return imageParser.getNumber();
 	}
 

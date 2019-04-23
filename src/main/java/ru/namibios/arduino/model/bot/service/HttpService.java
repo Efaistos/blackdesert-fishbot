@@ -26,9 +26,11 @@ import org.codehaus.jackson.type.TypeReference;
 import ru.namibios.arduino.config.Application;
 import ru.namibios.arduino.config.User;
 import ru.namibios.arduino.model.Screen;
+import ru.namibios.arduino.model.Stats;
 import ru.namibios.arduino.model.command.ShortCommand;
 import ru.namibios.arduino.utils.AppUtils;
 import ru.namibios.arduino.utils.ExceptionUtils;
+import ru.namibios.arduino.utils.ImageUtils;
 import ru.namibios.arduino.utils.JSON;
 
 import javax.net.ssl.KeyManager;
@@ -233,7 +235,7 @@ public class HttpService {
 		HttpService httpService = new HttpService();
 
 		String name = UUID.randomUUID().toString();
-        String s = httpService.parseByteCaptcha(name, new Screen("resources/1.jpg").toByteArray());
+        String s = httpService.parseByteCaptcha(name, ImageUtils.imageToBytes(new Screen("resources/1.jpg").getScreenShot()));
         if (!s.isEmpty()) {
             httpService.markFail(name);
         }
@@ -289,6 +291,7 @@ public class HttpService {
 
         ArrayList<BasicNameValuePair> postParameters = new ArrayList<>();
         postParameters.add(new BasicNameValuePair("USER", JSON.getInstance().writeValueAsString(Application.getUser())));
+        postParameters.add(new BasicNameValuePair("STATS", JSON.getInstance().writeValueAsString(Stats.getInstance())));
         postParameters.add(new BasicNameValuePair("STATUS", String.valueOf(status)));
 
         post.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));

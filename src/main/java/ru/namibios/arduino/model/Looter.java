@@ -33,6 +33,8 @@ public class Looter {
 
 			int slot = Integer.parseInt(slots[index]);
 
+			Stats.getInstance().lootFilter(slot);
+
 			LootType lootType = new LootType(index);
 			for (Integer okIndex : lootOk) {
 				if(slot == okIndex) lootType.setOk(true);
@@ -69,7 +71,7 @@ public class Looter {
 		}
 
 	}
-	
+
 	public List<LootType> getLootTypeList() {
 		return lootTypeList;
 	}

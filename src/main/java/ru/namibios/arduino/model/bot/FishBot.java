@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.log4j.Logger;
 import ru.namibios.arduino.config.Application;
 import ru.namibios.arduino.model.Slot;
+import ru.namibios.arduino.model.Stats;
 import ru.namibios.arduino.model.Timer;
 import ru.namibios.arduino.model.bot.service.HttpService;
 import ru.namibios.arduino.model.bot.service.PauseService;
@@ -99,6 +100,14 @@ public class FishBot {
     	executorService.submit(() -> {
 
     		try {
+
+				if (state instanceof ChangeRodState) {
+					Stats.getInstance().incChangeRod();
+				}
+
+				if (state instanceof UseSlotState) {
+					Stats.getInstance().incUseSlot();
+				}
 
 				httpService.call(state.getClass().getName());
 

@@ -8,7 +8,6 @@ import ru.namibios.arduino.utils.DateUtils;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,15 +39,6 @@ public class Screen {
 		this.screenShot = ImageIO.read(new File(filename));
 		this.screenShot = getScreenZone(zone);
 		makeGray();
-	}
-
-	public Screen(String filename, Rectangle zone, boolean isGray) throws IOException{
-		this.screenShot = ImageIO.read(new File(filename));
-		this.screenShot = getScreenZone(zone);
-		if (isGray) {
-			makeGray();
-		}
-
 	}
 
 	public Screen(Rectangle zone, boolean gray) throws AWTException {
@@ -169,24 +159,6 @@ public class Screen {
 		this.screenShot = screenShot;
 	}
 	
-	public byte[] toByteArray() {
-		
-		byte[] imageInByte = null;
-		
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(screenShot, "jpg", baos );
-			baos.flush();
-			imageInByte = baos.toByteArray();
-			baos.close();
-			
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-		}
-		
-		return imageInByte;
-	}
-	
 private class Noise {
 		
 		private BufferedImage image;
@@ -214,15 +186,16 @@ private class Noise {
 			for (BufferedImage bufferedImage : noises) {
 				for (int i = 0; i < height; i++) {
 					for (int j = 0; j < width; j++) {
-					Color color = new Color(image.getRGB(j, i));
-					Color noiseColor = new Color(bufferedImage.getRGB(j, i));
-					boolean isOldColor = color.getRGB() < noiseColor.getRGB();
-					if(isOldColor){
-						image.setRGB(j, i, color.getRGB());
-					}else{
-						image.setRGB(j, i, noiseColor.getRGB());
-					} 
-						
+
+						Color color = new Color(image.getRGB(j, i));
+						Color noiseColor = new Color(bufferedImage.getRGB(j, i));
+						boolean isOldColor = color.getRGB() < noiseColor.getRGB();
+						if(!isOldColor){
+							image.setRGB(j, i, color.getRGB());
+						}else{
+							image.setRGB(j, i, noiseColor.getRGB());
+						}
+
 					}
 				}
 			}

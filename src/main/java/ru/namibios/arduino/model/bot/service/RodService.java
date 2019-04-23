@@ -12,7 +12,7 @@ public class RodService {
     private static final Logger LOG = Logger.getLogger(RodService.class);
 
     public static final int MAX_RODS = 16;
-    public static final int LENGTH_ROW_INVENTORY = 8;
+    private static final int LENGTH_ROW_INVENTORY = 8;
 
     private List<Touch> rods;
 

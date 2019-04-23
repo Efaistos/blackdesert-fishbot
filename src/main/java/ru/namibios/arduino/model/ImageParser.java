@@ -23,22 +23,18 @@ public class ImageParser {
 	
 	private int row;
 	private int column;
-	
-	public ImageParser(Screen screen, MatrixTemplate[] matrixTemplate) {
-		this.screenShot = screen.getScreenShot();
-		this.row = screenShot.getHeight(); 
-		this.column = screenShot.getWidth();
-		this.screenMatrix = new int[row][column];
-		this.collectionTemplate = matrixTemplate;
-		this.keyList = new ArrayList<>();
-	}
-	
+
 	public ImageParser(Screen screen){
 		this.screenShot = screen.getScreenShot();
 		this.row = screenShot.getHeight();
 		this.column = screenShot.getWidth();
 		this.screenMatrix = new int[row][column];
 		this.keyList = new ArrayList<>();
+	}
+	
+	public ImageParser(Screen screen, MatrixTemplate[] matrixTemplate) {
+		this(screen);
+		this.collectionTemplate = matrixTemplate;
 	}
 	
 	public ImageParser(BufferedImage screenShot){

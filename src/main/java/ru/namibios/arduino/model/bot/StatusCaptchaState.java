@@ -3,6 +3,7 @@ package ru.namibios.arduino.model.bot;
 import org.apache.log4j.Logger;
 import ru.namibios.arduino.config.Application;
 import ru.namibios.arduino.config.Message;
+import ru.namibios.arduino.model.Stats;
 import ru.namibios.arduino.model.bot.service.HttpService;
 import ru.namibios.arduino.model.bot.service.StatusService;
 import ru.namibios.arduino.model.status.StatusCaptcha;
@@ -68,6 +69,8 @@ public class StatusCaptchaState extends State{
 						break;
 					}
 				}
+
+				Stats.getInstance().statusCaptcha(status);
 
 			}
 

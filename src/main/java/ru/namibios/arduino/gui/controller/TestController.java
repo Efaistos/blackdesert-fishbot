@@ -7,6 +7,7 @@ import ru.namibios.arduino.model.bot.service.RodService;
 import ru.namibios.arduino.model.bot.service.input.EmulationService;
 import ru.namibios.arduino.model.bot.service.input.emulation.AWTRobot;
 import ru.namibios.arduino.utils.DelayUtils;
+import ru.namibios.arduino.utils.ImageUtils;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,7 +49,7 @@ public class TestController implements ActionListener{
     private static void testCapctha() throws IOException {
 
         HttpService httpService = new HttpService();
-        httpService.parseByteCaptcha("test", new Screen("resources/1.jpg").toByteArray());
+        httpService.parseByteCaptcha("test", ImageUtils.imageToBytes(new Screen("resources/1.jpg").getScreenShot()));
     }
 
     private static void restartApplication() throws IOException {

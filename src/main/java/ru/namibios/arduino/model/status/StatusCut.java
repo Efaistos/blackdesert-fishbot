@@ -23,10 +23,6 @@ public class StatusCut implements Status<StatusCutTemplate>{
 
 	}
 
-	public static void main(String[] args) throws AWTException {
-		new StatusCut();
-	}
-
 	public StatusCut(String filename) throws IOException{
 		screen = new Screen(filename);
 	}
