@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ru.namibios.arduino.config.Application;
 import ru.namibios.arduino.config.Message;
 import ru.namibios.arduino.gui.view.RootView;
+import ru.namibios.arduino.model.Stats;
 import ru.namibios.arduino.utils.ExceptionUtils;
 
 import javax.swing.*;
@@ -162,6 +163,7 @@ public class Launcher {
         }
 
         Locale.setDefault(locale);
+		Stats.getInstance().initStart();
 
         try {
 

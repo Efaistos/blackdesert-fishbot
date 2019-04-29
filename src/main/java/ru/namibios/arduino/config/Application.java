@@ -3,7 +3,9 @@ package ru.namibios.arduino.config;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import ru.namibios.arduino.gui.Launcher;
+import ru.namibios.arduino.model.Stats;
 import ru.namibios.arduino.model.bot.service.HttpService;
+import ru.namibios.arduino.utils.DateUtils;
 import ru.namibios.arduino.utils.ExceptionUtils;
 
 import javax.swing.*;
@@ -11,6 +13,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 public class Application {
@@ -86,9 +91,24 @@ public class Application {
 		}
 	}
 
+	private static void recordStats(){
+
+		try {
+
+			Path path = Paths.get(ru.namibios.arduino.config.Path.RESOURCES + "stats_" + DateUtils.getYYYY_MM_DD_HH_MM_SS() + ".txt");
+			Files.createFile(path);
+			Files.write(path, Stats.getInstance().toString().getBytes());
+
+		} catch (IOException e) {
+			LOG.error(ExceptionUtils.getString(e));
+		}
+
+	}
 	public static void closeBot(int status){
 
 		LOG.info("Close bot with status - " + status);
+
+		Stats.getInstance().initEnd();
 
 		Launcher.close();
 
@@ -101,6 +121,8 @@ public class Application {
 		} catch (IOException e) {
 			LOG.error(ExceptionUtils.getString(e));
 		}
+
+		recordStats();
 
 		System.exit(status);
 

@@ -4,7 +4,13 @@ import ru.namibios.arduino.model.template.Loot;
 import ru.namibios.arduino.model.template.StatusCaptchaTemplate;
 import ru.namibios.arduino.model.template.StatusCutTemplate;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public final class Stats {
+
+    private Timestamp startTime;
+    private Timestamp endTime;
 
     private int changeRod;
     private int useSlots;
@@ -22,6 +28,14 @@ public final class Stats {
     private int key;
     private int unknown;
     private int trash;
+
+    public void initStart(){
+        startTime = new Timestamp(new Date().getTime());
+    }
+
+    public void initEnd(){
+        endTime = new Timestamp(new Date().getTime());
+    }
 
     public int getChangeRod() {
         return changeRod;
@@ -199,16 +213,19 @@ public final class Stats {
 
         builder.append("===================== STATISTIC =====================").append(System.lineSeparator());
 
+        builder.append("START TIME: ").append(startTime).append(System.lineSeparator());
+        builder.append("END TIME: ").append(endTime).append(System.lineSeparator());
+
         builder.append(System.lineSeparator()).append("===================== STATES ====================").append(System.lineSeparator());
         builder.append("USE SLOTS: ").append(useSlots).append(System.lineSeparator());
         builder.append("CHANGE RODS: ").append(changeRod).append(System.lineSeparator());
 
-        builder.append(System.lineSeparator()).append("===================== CATCH =======================").append(System.lineSeparator());
+        builder.append(System.lineSeparator()).append("================= CATCH =================").append(System.lineSeparator());
         builder.append("BAD: ").append(catchBad).append(System.lineSeparator());
         builder.append("GOOD: ").append(catchGood).append(System.lineSeparator());
         builder.append("PERFECT: ").append(catchPerfect).append(System.lineSeparator());
 
-        builder.append(System.lineSeparator()).append("================= PARSE CAPTCHA ==================").append(System.lineSeparator());
+        builder.append(System.lineSeparator()).append("================= PARSE CAPTCHA =================").append(System.lineSeparator());
         builder.append("SUCCESS: ").append(captchaParseSuccess).append(System.lineSeparator());
         builder.append("FAILURE: ").append(captchaParseFailure).append(System.lineSeparator());
 
