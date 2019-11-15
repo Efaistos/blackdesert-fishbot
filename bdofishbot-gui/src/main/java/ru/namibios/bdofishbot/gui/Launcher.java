@@ -3,6 +3,7 @@ package ru.namibios.bdofishbot.gui;
 import org.apache.log4j.Logger;
 import ru.namibios.bdofishbot.cli.Application;
 import ru.namibios.bdofishbot.cli.config.Message;
+import ru.namibios.bdofishbot.gui.view.Preview;
 import ru.namibios.bdofishbot.gui.view.RootView;
 import ru.namibios.bdofishbot.utils.ExceptionUtils;
 
@@ -18,7 +19,11 @@ public class Launcher {
 
         LOG.info("Start program..");
 
+        SwingUtilities.invokeLater(Preview::new);
+
         Application.check();
+
+        Application.getUser();
 
         Locale.setDefault(Application.getLocale());
 
@@ -34,13 +39,12 @@ public class Launcher {
         UIManager.getDefaults().addResourceBundle("locale");
 
         try {
-
             SwingUtilities.invokeLater(RootView::new);
-
         }catch (Exception e) {
             LOG.info(String.format(Message.LOG_FORMAT_ERROR, e));
             LOG.error(ExceptionUtils.getString(e));
         }
+
     }
 
 }

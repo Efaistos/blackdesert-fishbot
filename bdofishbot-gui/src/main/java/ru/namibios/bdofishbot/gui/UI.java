@@ -21,4 +21,5 @@ public class UI {
     public static final String IMG_PREMIUM = "resources/img/premium.png";
     public static final String SMALL_PREMIUM = "resources/img/premium_16.png";
 
+    public static final String IMG_BACKGROUND = "resources/img/background.gif";
 }

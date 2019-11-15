@@ -37,6 +37,12 @@ public class RootView extends JFrame {
 
     private static final Logger LOG = Logger.getLogger(RootView.class);
 
+    static final int LOCATION_X = 0;
+    static final int LOCATION_Y = 400;
+
+    static final int WIDTH = 520;
+    static final int HEIGHT = 300;
+
     private JPanel contentPane;
     private JButton buttonStart;
     private JButton buttonStop;
@@ -56,8 +62,8 @@ public class RootView extends JFrame {
 
         setContentPane(contentPane);
         setAlwaysOnTop(true);
-        setLocation(0, 400);
-        setSize(new Dimension(520, 300));
+        setLocation(LOCATION_X, LOCATION_Y);
+        setSize(new Dimension(WIDTH, HEIGHT));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Image im = new ImageIcon(Path.ROOT_ICON).getImage();
