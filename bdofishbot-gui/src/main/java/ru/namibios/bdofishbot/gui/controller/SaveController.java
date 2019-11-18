@@ -182,7 +182,7 @@ public class SaveController implements ActionListener{
 
 		try {
 
-			if (!Application.getUser().getVersion().equals("${pom.version}")) {
+			if (System.getProperty("dev") == null) {
 				Application.restart();
 			}
 
