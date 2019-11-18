@@ -4,8 +4,6 @@ import ru.namibios.bdofishbot.gui.UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Preview extends JDialog {
 
@@ -23,13 +21,6 @@ public class Preview extends JDialog {
         setAlwaysOnTop(true);
 
         setVisible(true);
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                dispose();
-            }
-        }, 5000);
 
     }
 
