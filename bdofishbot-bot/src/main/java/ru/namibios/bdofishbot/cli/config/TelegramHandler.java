@@ -6,13 +6,13 @@ import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import ru.namibios.bdofishbot.bot.Screen;
+import ru.namibios.bdofishbot.bot.service.BotService;
 import ru.namibios.bdofishbot.bot.service.HttpService;
 import ru.namibios.bdofishbot.bot.state.SideTaskContainer;
 import ru.namibios.bdofishbot.cli.Application;
 import ru.namibios.bdofishbot.utils.ExceptionUtils;
 import ru.namibios.bdofishbot.utils.ImageUtils;
 
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -21,17 +21,13 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
 
     private static final Logger LOG = Logger.getLogger(TelegramHandler.class);
 
-    private final JButton buttonStart;
-    private final JButton buttonStop;
-
     private HttpService httpService;
 
-    public TelegramHandler(JButton buttonStart, JButton buttonStop) {
+    private BotService botService;
 
+    public TelegramHandler(BotService botService) {
         this.httpService = new HttpService();
-
-        this.buttonStart = buttonStart;
-        this.buttonStop = buttonStop;
+        this.botService = botService;
     }
 
     @Override
@@ -88,7 +84,7 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
                 case "START":
                     LOG.info("Starting fishing bot..");
 
-                    buttonStart.doClick();
+                    botService.start();
 
                     try {
 
@@ -103,7 +99,7 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
                 case "STOP":
                     LOG.info("Stopping fishing bot");
 
-                    buttonStop.doClick();
+                    botService.stop();
 
                     try {
 

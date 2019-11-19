@@ -8,17 +8,18 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.simp.stomp.StompSessionHandler;
-import org.springframework.web.socket.client.WebSocketClient;
-import org.springframework.web.socket.client.standard.StandardWebSocketClient;
-import org.springframework.web.socket.messaging.WebSocketStompClient;
 import ru.namibios.bdofishbot.cli.Application;
-import ru.namibios.bdofishbot.cli.config.*;
+import ru.namibios.bdofishbot.cli.config.Message;
+import ru.namibios.bdofishbot.cli.config.Mode;
+import ru.namibios.bdofishbot.cli.config.Path;
+import ru.namibios.bdofishbot.cli.config.TextAreaAppender;
 import ru.namibios.bdofishbot.gui.CheckUpdate;
 import ru.namibios.bdofishbot.gui.Info;
 import ru.namibios.bdofishbot.gui.MousePointer;
-import ru.namibios.bdofishbot.gui.controller.*;
+import ru.namibios.bdofishbot.gui.controller.HotKeyController;
+import ru.namibios.bdofishbot.gui.controller.PremiumController;
+import ru.namibios.bdofishbot.gui.controller.SettingsController;
+import ru.namibios.bdofishbot.gui.controller.TestController;
 import ru.namibios.bdofishbot.utils.AppUtils;
 import ru.namibios.bdofishbot.utils.ExceptionUtils;
 import ru.namibios.bdofishbot.utils.ExecUtils;
@@ -138,12 +139,7 @@ public class RootView extends JFrame {
             premiumLabel.setIcon(new ImageIcon(IMG_PREMIUM));
         }
 
-        StartController startStopController = new StartController(this);
-
-        buttonStart.addActionListener(startStopController);
         buttonStart.setIcon(new ImageIcon(IMG_PLAY));
-
-        buttonStop.addActionListener(startStopController);
         buttonStop.setIcon(new ImageIcon(IMG_STOP));
 
         buttonTest.addActionListener(new TestController());
@@ -162,16 +158,6 @@ public class RootView extends JFrame {
             LOG.error(ExceptionUtils.getString(e));
         }
 
-        if (Application.getInstance().TELEGRAM()) {
-            WebSocketClient client = new StandardWebSocketClient();
-            WebSocketStompClient stompClient = new WebSocketStompClient(client);
-
-            stompClient.setMessageConverter(new MappingJackson2MessageConverter());
-
-            StompSessionHandler sessionHandler = new TelegramHandler(buttonStart, buttonStop);
-            stompClient.connect(Application.getInstance().URL_WS(), sessionHandler);
-        }
-
         ToolTipManager.sharedInstance().setDismissDelay(1000 * 100);
         ToolTipManager.sharedInstance().setInitialDelay(100);
 
@@ -185,6 +171,14 @@ public class RootView extends JFrame {
         setVisible(true);
         setResizable(false);
 
+    }
+
+    public JButton getButtonStart() {
+        return buttonStart;
+    }
+
+    public JButton getButtonStop() {
+        return buttonStop;
     }
 
     public JMenuItem getPreference() {

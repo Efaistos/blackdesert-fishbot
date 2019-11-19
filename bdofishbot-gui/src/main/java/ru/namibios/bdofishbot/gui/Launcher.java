@@ -1,8 +1,15 @@
 package ru.namibios.bdofishbot.gui;
 
 import org.apache.log4j.Logger;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.simp.stomp.StompSessionHandler;
+import org.springframework.web.socket.client.WebSocketClient;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
+import ru.namibios.bdofishbot.bot.service.BotService;
 import ru.namibios.bdofishbot.cli.Application;
 import ru.namibios.bdofishbot.cli.config.Message;
+import ru.namibios.bdofishbot.cli.config.TelegramHandler;
 import ru.namibios.bdofishbot.gui.controller.RootConroller;
 import ru.namibios.bdofishbot.utils.ExceptionUtils;
 
@@ -18,15 +25,28 @@ public class Launcher {
 
         LOG.info("Start program..");
 
-        RootConroller rootConroller = new RootConroller();
+        Locale.setDefault(Application.getLocale());
+
+        UIManager.getDefaults().addResourceBundle("locale");
+
+        BotService botService = new BotService();
+
+        RootConroller rootConroller = new RootConroller(botService);
 
         rootConroller.showPreview();
 
         Application.check();
-
         Application.getUser();
 
-        Locale.setDefault(Application.getLocale());
+        if (Application.getInstance().TELEGRAM()) {
+            WebSocketClient client = new StandardWebSocketClient();
+            WebSocketStompClient stompClient = new WebSocketStompClient(client);
+
+            stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+
+            StompSessionHandler sessionHandler = new TelegramHandler(botService);
+            stompClient.connect(Application.getInstance().URL_WS(), sessionHandler);
+        }
 
         try {
 
@@ -37,10 +57,11 @@ public class Launcher {
             LOG.error(ExceptionUtils.getString(e));
         }
 
-        UIManager.getDefaults().addResourceBundle("locale");
-
         try {
+
             rootConroller.showApplication();
+            rootConroller.addAction();
+
         }catch (Exception e) {
             LOG.info(String.format(Message.LOG_FORMAT_ERROR, e));
             LOG.error(ExceptionUtils.getString(e));

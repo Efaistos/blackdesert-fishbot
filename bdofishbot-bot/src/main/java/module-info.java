@@ -14,6 +14,7 @@ module bdofishbot.bot {
     requires spring.messaging;
     requires zip4j;
     requires bdofishbot.utils;
+    requires spring.websocket;
 
     exports ru.namibios.bdofishbot.bot;
     exports ru.namibios.bdofishbot.bot.state;
