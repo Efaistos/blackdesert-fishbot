@@ -21,11 +21,11 @@ public class Looter {
         List<Integer> lootTrash = new ArrayList<>();
 		this.lootTypeList = new ArrayList<>();
 		
-		if(Application.getInstance().ROCK())  lootOk.add(Loot.SCALA.ordinal()); else lootTrash.add(Loot.SCALA.ordinal());
-		if(Application.getInstance().KEY())   lootOk.add(Loot.KEY.ordinal());   else lootTrash.add(Loot.KEY.ordinal());
-		if(Application.getInstance().FISH())  lootOk.add(Loot.FISH.ordinal());  else lootTrash.add(Loot.FISH.ordinal());
-		if(Application.getInstance().EVENT()) lootOk.add(Loot.EVENT.ordinal()); else lootTrash.add(Loot.EVENT.ordinal());
-		if(Application.getInstance().CONFIRM()) lootConfirm.add(Loot.CONFIRM.ordinal()); else lootTrash.add(Loot.CONFIRM.ordinal());
+		if(Application.getConfig().ROCK())  lootOk.add(Loot.SCALA.ordinal()); else lootTrash.add(Loot.SCALA.ordinal());
+		if(Application.getConfig().KEY())   lootOk.add(Loot.KEY.ordinal());   else lootTrash.add(Loot.KEY.ordinal());
+		if(Application.getConfig().FISH())  lootOk.add(Loot.FISH.ordinal());  else lootTrash.add(Loot.FISH.ordinal());
+		if(Application.getConfig().EVENT()) lootOk.add(Loot.EVENT.ordinal()); else lootTrash.add(Loot.EVENT.ordinal());
+		if(Application.getConfig().CONFIRM()) lootConfirm.add(Loot.CONFIRM.ordinal()); else lootTrash.add(Loot.CONFIRM.ordinal());
 
 		lootTrash.add(Loot.TRASH.ordinal());
 

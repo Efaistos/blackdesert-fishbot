@@ -28,7 +28,7 @@ public class WaitFish implements Command{
 
 		try {
 
-			return getKeyByRegion(Application.getInstance().SPACE_OFFSET_X(), Application.getInstance().SPACE_OFFSET_Y());
+			return getKeyByRegion(Application.getConfig().SPACE_OFFSET_X(), Application.getConfig().SPACE_OFFSET_Y());
 
 		} catch (AWTException | IOException e) {
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class WaitFish implements Command{
 		imageParser = new ImageParser(screen, Chars.values());
 		imageParser.parse(Screen.WHITE);
 
-        if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_WAITFISH()) {
+        if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_WAITFISH()) {
             screen.saveImage(Path.DEBUG_WAITFISH);
         }
 
@@ -59,7 +59,7 @@ public class WaitFish implements Command{
 
 	private String getKeyByRegion(int offsetX, int offsetY) throws AWTException, IOException {
 
-		Rectangle region = Application.getInstance().SPACE();
+		Rectangle region = Application.getConfig().SPACE();
 
 		int startX = region.x;
 		int startY = region.y;

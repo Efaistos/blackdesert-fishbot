@@ -14,7 +14,7 @@ public class TelegramNotification extends Notification {
 		try {
 			
 			HttpService http = new HttpService();
-			http.sendTelegramMessage(Application.getInstance().TELEGRAM_KEY(), message);
+			http.sendTelegramMessage(Application.getConfig().TELEGRAM_KEY(), message);
 		
 		}catch (Exception e) {
 			e.printStackTrace();

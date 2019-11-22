@@ -43,7 +43,7 @@ public class StartFishStateTest {
     @Test
     public void testPause() throws IOException {
 
-        Application.getInstance().setProperty("bot.state.skip_calendar", "false");
+        Application.getConfig().setProperty("bot.state.skip_calendar", "false");
 
         Mockito.when(pauseService.isReady()).thenReturn(true);
         Mockito.when(inputService.send(any(Command.class))).thenReturn(true);
@@ -60,7 +60,7 @@ public class StartFishStateTest {
     @Test
     public void testStart() throws IOException {
 
-        Application.getInstance().setProperty("bot.state.skip_calendar", "true");
+        Application.getConfig().setProperty("bot.state.skip_calendar", "true");
 
         Mockito.when(inputService.send(any(Command.class))).thenReturn(true);
 
@@ -74,7 +74,7 @@ public class StartFishStateTest {
     @Test
     public void testWithoutSkipCalendar() throws IOException {
 
-        Application.getInstance().setProperty("bot.state.skip_calendar", "false");
+        Application.getConfig().setProperty("bot.state.skip_calendar", "false");
 
         Mockito.when(inputService.send(any(Command.class))).thenReturn(true);
 

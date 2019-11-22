@@ -25,7 +25,7 @@ public class ImageParser {
 	
 	private MatrixTemplate[] collectionTemplate;
 	
-	private double coefIdentification = Application.getInstance().COEF_IDENTITY();
+	private double coefIdentification = Application.getConfig().COEF_IDENTITY();
 	
 	private int row;
 	private int column;
@@ -124,14 +124,14 @@ public class ImageParser {
 		int index = 0;
 		while(index < collectionTemplate.length){
 			List<int[][]> templateNumber = collectionTemplate[index].getTemplates();
-			if (Application.getInstance().DEBUG_IMAGE_PARSER()) {
+			if (Application.getConfig().DEBUG_IMAGE_PARSER()) {
 				LOG.debug("Category: " + Loot.values()[index].name() + "(" + index + ")");
 			}
 			for (int[][] template : templateNumber) {
 				if(!isCorrectrDimension(numberMatrix, template)) continue;
 				coef.init(numberMatrix, template);
 				coef.calculate(index);
-				if (Application.getInstance().DEBUG_IMAGE_PARSER()) {
+				if (Application.getConfig().DEBUG_IMAGE_PARSER()) {
 					LOG.debug(coef);
 				}
 				if (coef.isFullMatch()) {

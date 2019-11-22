@@ -14,8 +14,8 @@ public class DebufStatus implements Command {
     private Screen screen;
 
     public DebufStatus() throws AWTException {
-        this.screen = new Screen(Application.getInstance().DEBUFF_DESERT(), false);
-        if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_DEBUF()) {
+        this.screen = new Screen(Application.getConfig().DEBUFF_DESERT(), false);
+        if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_DEBUF()) {
             screen.saveImage(Path.DEBUG_DEBUF);
         }
     }

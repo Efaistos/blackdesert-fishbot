@@ -34,7 +34,7 @@ public class DeferredStartStateTest {
     @Test
     public void testStart() {
 
-        Application.getInstance().setProperty("bot.autouse.start", "true, 0, Start");
+        Application.getConfig().setProperty("bot.autouse.start", "true, 0, Start");
 
         when(timer.isOver(anyLong())).thenReturn(true);
 
@@ -48,7 +48,7 @@ public class DeferredStartStateTest {
     @Test
     public void testStartInactive() {
 
-        Application.getInstance().setProperty("bot.autouse.start", "false, 0, Start");
+        Application.getConfig().setProperty("bot.autouse.start", "false, 0, Start");
         when(timer.isOver(anyLong())).thenReturn(false);
 
         deferredStartState.onStep();
@@ -60,7 +60,7 @@ public class DeferredStartStateTest {
     @Test
     public void testWait() {
 
-        Application.getInstance().setProperty("bot.autouse.start", "true, 0, Start");
+        Application.getConfig().setProperty("bot.autouse.start", "true, 0, Start");
         when(timer.isOver(anyLong())).thenReturn(false);
 
         deferredStartState.onStep();

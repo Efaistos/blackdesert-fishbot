@@ -14,8 +14,8 @@ public class ChangeRodState extends State{
 
 	ChangeRodState(FishBot fishBot) {
 		super(fishBot);
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_CHANGE_ROD();
-		this.afterStart = Application.getInstance().DELAY_AFTER_CHANGE_ROD();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_CHANGE_ROD();
+		this.afterStart = Application.getConfig().DELAY_AFTER_CHANGE_ROD();
 
 		this.rodService = fishBot.getRodService();
 
@@ -46,7 +46,7 @@ public class ChangeRodState extends State{
 				LOG.info("Available: " + rodService.getCountAvailableRods() + "/" + RodService.MAX_RODS);
 
 				fishBot.call();
-				fishBot.notifyUser("Started change fishing rod. Available: " + rodService.getCountAvailableRods() + "/" + Application.getInstance().COUNT_ROD());
+				fishBot.notifyUser("Started change fishing rod. Available: " + rodService.getCountAvailableRods() + "/" + Application.getConfig().COUNT_ROD());
 
 				String nextFree = rodService.getNext();
 				inputService.send( () -> nextFree);

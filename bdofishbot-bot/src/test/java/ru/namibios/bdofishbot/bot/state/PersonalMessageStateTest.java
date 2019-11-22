@@ -41,8 +41,8 @@ public class PersonalMessageStateTest {
     @Test
     public void testDetectedAutoFish() {
 
-        Application.getInstance().setProperty("bot.pm.event.autofish","true");
-        Application.getInstance().setProperty("bot.pm.event.exitgame","false");
+        Application.getConfig().setProperty("bot.pm.event.autofish","true");
+        Application.getConfig().setProperty("bot.pm.event.exitgame","false");
 
         when(pm.isDetected()).thenReturn(true);
         when(fishBot.isPmDetected()).thenReturn(false);
@@ -61,8 +61,8 @@ public class PersonalMessageStateTest {
     @Test
     public void testDetectedExitGame() throws IOException {
 
-        Application.getInstance().setProperty("bot.pm.event.autofish","false");
-        Application.getInstance().setProperty("bot.pm.event.exitgame","true");
+        Application.getConfig().setProperty("bot.pm.event.autofish","false");
+        Application.getConfig().setProperty("bot.pm.event.exitgame","true");
 
         when(pm.isDetected()).thenReturn(true);
         when(fishBot.isPmDetected()).thenReturn(false);

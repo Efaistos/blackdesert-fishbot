@@ -16,9 +16,9 @@ public class Line implements Command {
 	
 	public Line() throws AWTException {
 
-	    screen = new Screen(Application.getInstance().SUB_LINE());
+	    screen = new Screen(Application.getConfig().SUB_LINE());
 
-        if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_SUBLINE()) {
+        if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_SUBLINE()) {
             screen.saveImage(Path.DEBUG_SUBLINE);
         }
 		

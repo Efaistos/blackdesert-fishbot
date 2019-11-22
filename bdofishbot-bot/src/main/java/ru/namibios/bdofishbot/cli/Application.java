@@ -54,7 +54,7 @@ public class Application {
 
 	private static ApplicationConfig config;
 
-	public static ApplicationConfig getInstance() {
+	public static ApplicationConfig getConfig() {
 
 		if(config == null) {
 			config = ConfigFactory.create(ApplicationConfig.class);
@@ -130,7 +130,7 @@ public class Application {
 
 		LOG.info("Close bot with status - " + status);
 
-		if (Application.getInstance().LOOT_SYNC()) {
+		if (Application.getConfig().LOOT_SYNC()) {
 			sync();
 		}
 
@@ -188,7 +188,7 @@ public class Application {
 	public static final Map<String, Locale> LOCALES = new HashMap<>();
 
 	private static ServerSocket socket;
-	private static final int PORT = Application.getInstance().LOCAL_PORT();
+	private static final int PORT = Application.getConfig().LOCAL_PORT();
 
 	static {
 		LOCALES.put("English", new Locale("en", "US"));
@@ -217,7 +217,7 @@ public class Application {
 	}
 
 	public static Locale getLocale() {
-		String language = Application.getInstance().LANGUAGE();
+		String language = Application.getConfig().LANGUAGE();
 		LOG.debug("Language: " + language);
 
 		Locale locale = LOCALES.get(language);
@@ -262,8 +262,8 @@ public class Application {
 			}
 
 			catch (BindException e) {
-				JOptionPane.showMessageDialog(null, "Program already running on port: " + Application.getInstance().LOCAL_PORT(), "Warning", JOptionPane.ERROR_MESSAGE);
-				LOG.error("Program already running on port: " + Application.getInstance().LOCAL_PORT());
+				JOptionPane.showMessageDialog(null, "Program already running on port: " + Application.getConfig().LOCAL_PORT(), "Warning", JOptionPane.ERROR_MESSAGE);
+				LOG.error("Program already running on port: " + Application.getConfig().LOCAL_PORT());
 				LOG.error(ExceptionUtils.getString(e));
 				Application.closeBot(Application.CODE_ALREADY_RUNNING);
 				return false;
@@ -289,7 +289,7 @@ public class Application {
 
 			try (Socket s = new Socket()) {
 
-				String url = Application.getInstance().URL_SERVER_HTTPS();
+				String url = Application.getConfig().URL_SERVER_HTTPS();
 				String ip = url.substring(0, url.indexOf(":"));
 				String port = url.substring(url.indexOf(":") + 1 );
 

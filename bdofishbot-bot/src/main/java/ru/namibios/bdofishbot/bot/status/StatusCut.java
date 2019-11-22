@@ -15,9 +15,9 @@ public class StatusCut implements Status<StatusCutTemplate>{
 	
 	public StatusCut() throws AWTException {
 
-		screen = new Screen(Application.getInstance().STATUS_CUT());
+		screen = new Screen(Application.getConfig().STATUS_CUT());
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_STATUS_CUT()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_STATUS_CUT()) {
 			screen.saveImage(Path.DEBUG_STATUSCUT);
 		}
 

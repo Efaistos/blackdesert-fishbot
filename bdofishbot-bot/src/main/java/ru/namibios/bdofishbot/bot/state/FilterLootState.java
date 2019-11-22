@@ -13,8 +13,8 @@ public class FilterLootState extends State{
 	FilterLootState(FishBot fishBot) {
 		super(fishBot);
 		
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_FILTER_LOOT();
-		this.afterStart = Application.getInstance().DELAY_AFTER_FILTER_LOOT();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_FILTER_LOOT();
+		this.afterStart = Application.getConfig().DELAY_AFTER_FILTER_LOOT();
 	}
 
 	@Override

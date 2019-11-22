@@ -35,13 +35,13 @@ public class Captcha implements Command{
 
 		String name = String.valueOf(new Date().getTime());
 
-		this.screen = new Screen(Application.getInstance().CAPTCHA());
+		this.screen = new Screen(Application.getConfig().CAPTCHA());
 		this.screen.saveDirty(name);
-		this.screen.clearNoise(Application.getInstance().CNT_KAPCHA());
+		this.screen.clearNoise(Application.getConfig().CNT_KAPCHA());
 		this.screen.saveClean(name);
 		this.key = "";
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_CAPTCHA()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_CAPTCHA()) {
 			screen.saveImage(Path.DEBUG_CAPTCHA);
 		}
 	}

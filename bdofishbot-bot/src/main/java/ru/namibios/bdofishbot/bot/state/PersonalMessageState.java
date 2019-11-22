@@ -21,7 +21,7 @@ public class PersonalMessageState extends State {
 		this.afterStart = 0;
 
 
-		pm = new PersonalMessage(Application.getInstance().PM_COEF());
+		pm = new PersonalMessage(Application.getConfig().PM_COEF());
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class PersonalMessageState extends State {
 				LOG.info("Chat activity detected.");
 				fishBot.notifyUser(Message.RECEIVED_PRIVATE_MESSAGE);
 
-				if (Application.getInstance().PM_AUTOFISH()) {
+				if (Application.getConfig().PM_AUTOFISH()) {
 					LOG.info("Received a private message. Switch to autofish...");
 					fishBot.notifyUser(Message.TURN_AUTOFISH);
 					fishBot.setRunned(false);
 				}
-				else if (Application.getInstance().PM_EXIT_GAME()) {
+				else if (Application.getConfig().PM_EXIT_GAME()) {
 					LOG.info("Received a private message. Exit game...");
 					fishBot.notifyUser(Message.EXIT_GAME);
 					fishBot.setRunned(false);

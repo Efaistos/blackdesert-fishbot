@@ -19,7 +19,7 @@ public class ArduinoService implements InputService{
 
     public ArduinoService() {
 
-        serialPort = SerialPort.getCommPort(Application.getInstance().COM_PORT());
+        serialPort = SerialPort.getCommPort(Application.getConfig().COM_PORT());
         serialPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
 
         if (!serialPort.openPort()) {
@@ -34,7 +34,7 @@ public class ArduinoService implements InputService{
 
         Timer timer = new Timer();
 
-        while (!timer.isOver(Application.getInstance().INPUT_TIMEOUT())) {
+        while (!timer.isOver(Application.getConfig().INPUT_TIMEOUT())) {
 
             if (serialPort.isOpen()) {
                 if (serialPort.getInputStream().available() > 0) {

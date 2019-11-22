@@ -19,10 +19,10 @@ public class PersonalMessage {
 	public PersonalMessage(double coef) throws AWTException {
 		LOG.info("Check chat");
 
-		this.screen = new Screen(Application.getInstance().CHAT());
+		this.screen = new Screen(Application.getConfig().CHAT());
 		this.allowableCoef = coef;
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_PM_MESSAGE()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_PM_MESSAGE()) {
 			screen.saveImage(Path.DEBUG_PM_MESSAGE);
 
 		}

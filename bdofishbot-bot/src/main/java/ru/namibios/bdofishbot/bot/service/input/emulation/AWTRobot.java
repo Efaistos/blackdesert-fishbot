@@ -59,7 +59,7 @@ public class AWTRobot extends AbstractEmulationInput {
     @Override
     public void pressKey(int key) {
         robot.keyPress(key);
-        DelayUtils.delay(random.nextInt(50) + Application.getInstance().PRESS_KEY_DELAY());
+        DelayUtils.delay(random.nextInt(50) + Application.getConfig().PRESS_KEY_DELAY());
         robot.keyRelease(key);
 
     }

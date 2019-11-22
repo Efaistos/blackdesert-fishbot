@@ -14,9 +14,9 @@ public class StatusCaptcha implements Status<StatusCaptchaTemplate>{
 	private Screen screen;
 
 	public StatusCaptcha() throws AWTException {
-		this.screen = new Screen(Application.getInstance().STATUS_CAPTCHA());
+		this.screen = new Screen(Application.getConfig().STATUS_CAPTCHA());
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_STATUS_CAPTCHA()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_STATUS_CAPTCHA()) {
 			screen.saveImage(Path.DEBUG_STATUSCAPTCHA);
 		}
 

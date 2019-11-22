@@ -42,7 +42,7 @@ public class SlotTaskModeStateTest {
     @Ignore
     public void testSlotReadyWithCalendar() throws IOException {
 
-        Application.getInstance().setProperty("bot.state.skip_calendar", "true");
+        Application.getConfig().setProperty("bot.state.skip_calendar", "true");
 
         when(slotService.isActiveTasks()).thenReturn(true);
         when(slotService.isReady()).thenReturn(true);
@@ -61,7 +61,7 @@ public class SlotTaskModeStateTest {
     @Test
     public void testSlotReadyWithoutCalendar() throws IOException {
 
-        Application.getInstance().setProperty("bot.state.skip_calendar", "false");
+        Application.getConfig().setProperty("bot.state.skip_calendar", "false");
 
         when(slotService.isActiveTasks()).thenReturn(true);
         when(slotService.isReady()).thenReturn(true);

@@ -18,11 +18,11 @@ public class LootTest {
 
     @Before
     public void init() {
-        Application.getInstance();
-        Application.getInstance().setProperty("bot.loot.rock", "true");
-        Application.getInstance().setProperty("bot.loot.key",  "true");
-        Application.getInstance().setProperty("bot.loot.event","true");
-        Application.getInstance().setProperty("bot.loot.fish", "true");
+        Application.getConfig();
+        Application.getConfig().setProperty("bot.loot.rock", "true");
+        Application.getConfig().setProperty("bot.loot.key",  "true");
+        Application.getConfig().setProperty("bot.loot.event","true");
+        Application.getConfig().setProperty("bot.loot.fish", "true");
 
     }
 

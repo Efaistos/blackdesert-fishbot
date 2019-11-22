@@ -54,12 +54,12 @@ public class WaitFishStateTest {
     public void testChangeRod() throws IOException {
 
         Mockito.when(inputService.send(any(WaitFish.class))).thenReturn(false);
-        Mockito.when(timer.isOver(Application.getInstance().TIME_CHANGE_ROD())).thenReturn(true);
+        Mockito.when(timer.isOver(Application.getConfig().TIME_CHANGE_ROD())).thenReturn(true);
 
         waitFishState.onStep();
 
         Mockito.verify(inputService).send(isA(WaitFish.class));
-        Mockito.verify(timer).isOver(Application.getInstance().TIME_CHANGE_ROD());
+        Mockito.verify(timer).isOver(Application.getConfig().TIME_CHANGE_ROD());
         Mockito.verify(fishBot).setState(isA(ChangeRodState.class));
 
     }

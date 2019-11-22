@@ -25,12 +25,12 @@ public class HotKeyController extends NativeKeyAdapter {
 
         int keyCode = nativeKeyEvent.getKeyCode();
 
-        if (keyCode == Application.getInstance().HOT_KEY_START()) {
+        if (keyCode == Application.getConfig().HOT_KEY_START()) {
             LOG.debug("Click start");
             buttonStart.doClick();
         }
 
-        if (keyCode == Application.getInstance().HOT_KEY_STOP()) {
+        if (keyCode == Application.getConfig().HOT_KEY_STOP()) {
             LOG.debug("Click Stop");
             buttonStop.doClick();
         }

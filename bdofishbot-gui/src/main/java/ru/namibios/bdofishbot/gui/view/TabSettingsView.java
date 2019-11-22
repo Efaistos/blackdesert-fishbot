@@ -368,40 +368,40 @@ public class TabSettingsView extends JDialog {
 
     private void initDebug() {
 
-        cbDebugWaitFish.setSelected(Application.getInstance().DEBUG_WAITFISH());
-        cbDebugStatusCaptcha.setSelected(Application.getInstance().DEBUG_STATUS_CAPTCHA());
-        cbDebugStatusCut.setSelected(Application.getInstance().DEBUG_STATUS_CUT());
-        cbDebugLine.setSelected(Application.getInstance().DEBUG_SUBLINE());
-        cbDebugCaptcha.setSelected(Application.getInstance().DEBUG_CAPTCHA());
-        cbDebugPersonalMessage.setSelected(Application.getInstance().DEBUG_PM_MESSAGE());
-        cbDebugLootFilter.setSelected(Application.getInstance().DEBUG_FILTER_LOOT());
-        cbDebugDebuf.setSelected(Application.getInstance().DEBUG_DEBUF());
-        cbUnknownLoot.setSelected(Application.getInstance().SAVE_UNKNOWN());
-        cbUnsortLoot.setSelected(Application.getInstance().SAVE_UNSORT());
+        cbDebugWaitFish.setSelected(Application.getConfig().DEBUG_WAITFISH());
+        cbDebugStatusCaptcha.setSelected(Application.getConfig().DEBUG_STATUS_CAPTCHA());
+        cbDebugStatusCut.setSelected(Application.getConfig().DEBUG_STATUS_CUT());
+        cbDebugLine.setSelected(Application.getConfig().DEBUG_SUBLINE());
+        cbDebugCaptcha.setSelected(Application.getConfig().DEBUG_CAPTCHA());
+        cbDebugPersonalMessage.setSelected(Application.getConfig().DEBUG_PM_MESSAGE());
+        cbDebugLootFilter.setSelected(Application.getConfig().DEBUG_FILTER_LOOT());
+        cbDebugDebuf.setSelected(Application.getConfig().DEBUG_DEBUF());
+        cbUnknownLoot.setSelected(Application.getConfig().SAVE_UNKNOWN());
+        cbUnsortLoot.setSelected(Application.getConfig().SAVE_UNSORT());
     }
 
     private void initDelay() {
 
         DelayComponent start = new DelayComponent(tfDelayStartBefore, tfDelayStartAfter, numericVerifier);
-        start.init(Application.getInstance().DELAY_BEFORE_START(), Application.getInstance().DELAY_AFTER_START());
+        start.init(Application.getConfig().DELAY_BEFORE_START(), Application.getConfig().DELAY_AFTER_START());
 
         DelayComponent waitfish = new DelayComponent(tfDelayWaitfishBefore, tfDelayWaitfishAfter, numericVerifier);
-        waitfish.init(Application.getInstance().DELAY_BEFORE_WAIT_FISH(), Application.getInstance().DELAY_AFTER_WAIT_FISH());
+        waitfish.init(Application.getConfig().DELAY_BEFORE_WAIT_FISH(), Application.getConfig().DELAY_AFTER_WAIT_FISH());
 
         DelayComponent cut = new DelayComponent(tfDelayCutBefore, tfDelayCutAfter, numericVerifier);
-        cut.init(Application.getInstance().DELAY_BEFORE_CUT_FISH(), Application.getInstance().DELAY_AFTER_CUT_FISH());
+        cut.init(Application.getConfig().DELAY_BEFORE_CUT_FISH(), Application.getConfig().DELAY_AFTER_CUT_FISH());
 
         DelayComponent statusCut = new DelayComponent(tfDelayStatusCutBefore, tfDelayStatusCutAfter, numericVerifier);
-        statusCut.init(Application.getInstance().DELAY_BEFORE_STATUS_CUT(), Application.getInstance().DELAY_AFTER_STATUS_CUT());
+        statusCut.init(Application.getConfig().DELAY_BEFORE_STATUS_CUT(), Application.getConfig().DELAY_AFTER_STATUS_CUT());
 
         DelayComponent captcha = new DelayComponent(tfDelayCaptchaBefore, tfDelayCaptchaAfter, numericVerifier);
-        captcha.init(Application.getInstance().DELAY_BEFORE_KAPCHA(), Application.getInstance().DELAY_AFTER_KAPCHA());
+        captcha.init(Application.getConfig().DELAY_BEFORE_KAPCHA(), Application.getConfig().DELAY_AFTER_KAPCHA());
 
         DelayComponent statusCaptcha = new DelayComponent(tfDelayStatusCaptchaBefore, tfDelayStatusCaptchaAfter, numericVerifier);
-        statusCaptcha.init(Application.getInstance().DELAY_BEFORE_STATUS_KAPCHA(), Application.getInstance().DELAY_AFTER_STATUS_KAPCHA());
+        statusCaptcha.init(Application.getConfig().DELAY_BEFORE_STATUS_KAPCHA(), Application.getConfig().DELAY_AFTER_STATUS_KAPCHA());
 
         DelayComponent lootFilter = new DelayComponent(tfDelayLootFilterBefore, tfDelayLootFilterAfter, numericVerifier);
-        lootFilter.init(Application.getInstance().DELAY_BEFORE_FILTER_LOOT(), Application.getInstance().DELAY_AFTER_FILTER_LOOT());
+        lootFilter.init(Application.getConfig().DELAY_BEFORE_FILTER_LOOT(), Application.getConfig().DELAY_AFTER_FILTER_LOOT());
 
     }
 
@@ -409,7 +409,7 @@ public class TabSettingsView extends JDialog {
 
         cbMode.addItem(InputMode.ROBOT);
         cbMode.addItem(InputMode.ARDUINO);
-        cbMode.setSelectedItem(Application.getInstance().INPUT_MODE());
+        cbMode.setSelectedItem(Application.getConfig().INPUT_MODE());
         cbMode.addItemListener(e -> {
             cbPort.setEnabled(e.getItem() == InputMode.ARDUINO);
         });
@@ -428,7 +428,7 @@ public class TabSettingsView extends JDialog {
 
         int count = cbPort.getItemCount();
         for (int index = 0; index < count; index++) {
-            if (cbPort.getItemAt(index).contains(Application.getInstance().COM_PORT())) {
+            if (cbPort.getItemAt(index).contains(Application.getConfig().COM_PORT())) {
                 cbPort.setSelectedItem(cbPort.getItemAt(index));
             }
         }
@@ -448,12 +448,12 @@ public class TabSettingsView extends JDialog {
 
         lDebuf.setIcon(new ImageIcon(UI.SMALL_PREMIUM));
         lDebuf.setToolTipText(UIManager.getString("preference.premium.tooltip"));
-        cbDebufDay.setSelected(Application.getInstance().SLOT_DEBUF_DESERT_DAY().isActive());
-        tfDebufDayKey.setText(Application.getInstance().SLOT_DEBUF_DESERT_DAY().getKey());
+        cbDebufDay.setSelected(Application.getConfig().SLOT_DEBUF_DESERT_DAY().isActive());
+        tfDebufDayKey.setText(Application.getConfig().SLOT_DEBUF_DESERT_DAY().getKey());
         tfDebufDayKey.setInputVerifier(slotKeyVerifier);
 
-        cbDebufNight.setSelected(Application.getInstance().SLOT_DEBUF_DESERT_NIGHT().isActive());
-        tfDebufNightKey.setText(Application.getInstance().SLOT_DEBUF_DESERT_NIGHT().getKey());
+        cbDebufNight.setSelected(Application.getConfig().SLOT_DEBUF_DESERT_NIGHT().isActive());
+        tfDebufNightKey.setText(Application.getConfig().SLOT_DEBUF_DESERT_NIGHT().getKey());
         tfDebufNightKey.setInputVerifier(slotKeyVerifier);
 
         initLootFilter();
@@ -469,9 +469,9 @@ public class TabSettingsView extends JDialog {
 
     private void initCrashGame() {
 
-        rbCrashExitBot.setSelected(Application.getInstance().CRASH_EXIT_BOT());
-        rbCrashStopBot.setSelected(Application.getInstance().CRASH_STOP_BOT());
-        rbCrashShutdownPc.setSelected(Application.getInstance().CRASH_SHUTDOWN_PC());
+        rbCrashExitBot.setSelected(Application.getConfig().CRASH_EXIT_BOT());
+        rbCrashStopBot.setSelected(Application.getConfig().CRASH_STOP_BOT());
+        rbCrashShutdownPc.setSelected(Application.getConfig().CRASH_SHUTDOWN_PC());
 
         ButtonGroup pmGroup = new ButtonGroup();
         pmGroup.add(rbCrashExitBot);
@@ -482,10 +482,10 @@ public class TabSettingsView extends JDialog {
     private void initAdd() {
 
         Application.LOCALES.keySet().forEach(s -> cbLanguage.addItem(s));
-        cbLanguage.setSelectedItem(Application.getInstance().LANGUAGE());
+        cbLanguage.setSelectedItem(Application.getConfig().LANGUAGE());
 
         UiThemeConverter.THEMES.keySet().forEach(s -> cbTheme.addItem(s));
-        cbTheme.setSelectedItem(UiThemeConverter.unconvert(Application.getInstance().THEME()));
+        cbTheme.setSelectedItem(UiThemeConverter.unconvert(Application.getConfig().THEME()));
 
         lIdeaInputDelay.setIcon(new ImageIcon(UI.IMG_IDEA));
         lIdeaParseIdentity.setIcon(new ImageIcon(UI.IMG_IDEA));
@@ -498,48 +498,48 @@ public class TabSettingsView extends JDialog {
         lIdeaDebufDay.setToolTipText(String.format(UIManager.getString("preference.label.debuf.day.tooltip"), ImageUtils.toUrl(UI.IMG_DEBUF_DAY)));
         lIdeaDebufNight.setToolTipText(String.format(UIManager.getString("preference.label.debuf.night.tooltip"), ImageUtils.toUrl(UI.IMG_DEBUF_NIGHT)));
 
-        cbSkipCalendar.setSelected(Application.getInstance().SKIP_CALENDAR());
-        tfInputDelay.setText(String.valueOf(Application.getInstance().PRESS_KEY_DELAY()));
-        tfParseCoef.setText(String.valueOf(Application.getInstance().COEF_IDENTITY()));
-        tfCaptchaNoiseIteration.setText(String.valueOf(Application.getInstance().CNT_KAPCHA()));
+        cbSkipCalendar.setSelected(Application.getConfig().SKIP_CALENDAR());
+        tfInputDelay.setText(String.valueOf(Application.getConfig().PRESS_KEY_DELAY()));
+        tfParseCoef.setText(String.valueOf(Application.getConfig().COEF_IDENTITY()));
+        tfCaptchaNoiseIteration.setText(String.valueOf(Application.getConfig().CNT_KAPCHA()));
 
-        tfState.setText(String.valueOf(Application.getInstance().STATE_OVERFLOW()));
-        tfCutState.setText(String.valueOf(Application.getInstance().STATE_CUT_OVERFLOW()));
-        tfCapcthaState.setText(String.valueOf(Application.getInstance().STATE_STATUS_CAPTCHA_OVERFLOW()));
+        tfState.setText(String.valueOf(Application.getConfig().STATE_OVERFLOW()));
+        tfCutState.setText(String.valueOf(Application.getConfig().STATE_CUT_OVERFLOW()));
+        tfCapcthaState.setText(String.valueOf(Application.getConfig().STATE_STATUS_CAPTCHA_OVERFLOW()));
 
         TouchComponent lootSlotOne = new TouchComponent(tfLootSlotOneX, tfLootSlotOneY, numericVerifier);
-        lootSlotOne.init(Application.getInstance().LOOT_TOUCH()[0]);
+        lootSlotOne.init(Application.getConfig().LOOT_TOUCH()[0]);
 
         TouchComponent lootSlotTwo = new TouchComponent(tfLootSlotTwoX, tfLootSlotTwoY, numericVerifier);
-        lootSlotTwo.init(Application.getInstance().LOOT_TOUCH()[1]);
+        lootSlotTwo.init(Application.getConfig().LOOT_TOUCH()[1]);
 
         TouchComponent lootSlotThree = new TouchComponent(tfLootSlotThreeX, tfLootSlotThreeY, numericVerifier);
-        lootSlotThree.init(Application.getInstance().LOOT_TOUCH()[2]);
+        lootSlotThree.init(Application.getConfig().LOOT_TOUCH()[2]);
 
         TouchComponent lootSlotFour = new TouchComponent(tfLootSlotFourX, tfLootSlotFourY, numericVerifier);
-        lootSlotFour.init(Application.getInstance().LOOT_TOUCH()[3]);
+        lootSlotFour.init(Application.getConfig().LOOT_TOUCH()[3]);
 
         TouchComponent lootSlotFive = new TouchComponent(tfLootSlotFiveX, tfLootSlotFiveY, numericVerifier);
-        lootSlotFive.init(Application.getInstance().LOOT_TOUCH()[4]);
+        lootSlotFive.init(Application.getConfig().LOOT_TOUCH()[4]);
 
         TouchComponent lootSlotSix = new TouchComponent(tfLootSlotSixX, tfLootSlotSixY, numericVerifier);
-        lootSlotSix.init(Application.getInstance().LOOT_TOUCH()[5]);
+        lootSlotSix.init(Application.getConfig().LOOT_TOUCH()[5]);
 
         TouchComponent lootSlotSeven = new TouchComponent(tfLootSlotSevenX, tfLootSlotSevenY, numericVerifier);
-        lootSlotSeven.init(Application.getInstance().LOOT_TOUCH()[6]);
+        lootSlotSeven.init(Application.getConfig().LOOT_TOUCH()[6]);
 
         TouchComponent lootSlotEight = new TouchComponent(tfLootSlotEightX, tfLootSlotEightY, numericVerifier);
-        lootSlotEight.init(Application.getInstance().LOOT_TOUCH()[7]);
+        lootSlotEight.init(Application.getConfig().LOOT_TOUCH()[7]);
 
         lRodX.setIcon(new ImageIcon(UI.IMG_IDEA));
         lRodY.setIcon(new ImageIcon(UI.IMG_IDEA));
         lRodDx.setIcon(new ImageIcon(UI.IMG_IDEA));
         lRodDy.setIcon(new ImageIcon(UI.IMG_IDEA));
 
-        tfRodX.setText(String.valueOf(Application.getInstance().ROD_START_X()));
-        tfRodY.setText(String.valueOf(Application.getInstance().ROD_START_Y()));
-        tfRodDX.setText(String.valueOf(Application.getInstance().ROD_DX()));
-        tfRodDY.setText(String.valueOf(Application.getInstance().ROD_DY()));
+        tfRodX.setText(String.valueOf(Application.getConfig().ROD_START_X()));
+        tfRodY.setText(String.valueOf(Application.getConfig().ROD_START_Y()));
+        tfRodDX.setText(String.valueOf(Application.getConfig().ROD_DX()));
+        tfRodDY.setText(String.valueOf(Application.getConfig().ROD_DY()));
 
         tfInputDelay.setInputVerifier(numericVerifier);
         tfCaptchaNoiseIteration.setInputVerifier(numericVerifier);
@@ -562,7 +562,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfFullscreenWidth)
                 .setComponentHeight(tfFullscreenHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().FULL_SCREEN())
+                .setRectangle(Application.getConfig().FULL_SCREEN())
                 .build();
 
         CoordComponent space = CoordComponent.Builder.config()
@@ -571,7 +571,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfSpaceWidth)
                 .setComponentHeight(tfSpaceHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().SPACE())
+                .setRectangle(Application.getConfig().SPACE())
                 .build();
 
         CoordComponent line = CoordComponent.Builder.config()
@@ -580,7 +580,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLineWidth)
                 .setComponentHeight(tfLineHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LINE())
+                .setRectangle(Application.getConfig().LINE())
                 .build();
 
         CoordComponent subline = CoordComponent.Builder.config()
@@ -589,7 +589,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfSubLineWidth)
                 .setComponentHeight(tfSubLineHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().SUB_LINE())
+                .setRectangle(Application.getConfig().SUB_LINE())
                 .build();
 
         CoordComponent statusCut = CoordComponent.Builder.config()
@@ -598,7 +598,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfStatusCutWidth)
                 .setComponentHeight(tfStatusCutHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().STATUS_CUT())
+                .setRectangle(Application.getConfig().STATUS_CUT())
                 .build();
 
         CoordComponent statusCaptcha = CoordComponent.Builder.config()
@@ -607,7 +607,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfStatusCaptchaWidth)
                 .setComponentHeight(tfStatusCaptchaHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().STATUS_CAPTCHA())
+                .setRectangle(Application.getConfig().STATUS_CAPTCHA())
                 .build();
 
         CoordComponent captcha = CoordComponent.Builder.config()
@@ -616,7 +616,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfCaptchaWidth)
                 .setComponentHeight(tfCaptchaHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().CAPTCHA())
+                .setRectangle(Application.getConfig().CAPTCHA())
                 .build();
 
         CoordComponent lootOne = CoordComponent.Builder.config()
@@ -625,7 +625,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootOneWidth)
                 .setComponentHeight(tfLootOneHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[0])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[0])
                 .build();
 
         CoordComponent lootTwo = CoordComponent.Builder.config()
@@ -634,7 +634,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootTwoWidth)
                 .setComponentHeight(tfLootTwoHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[1])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[1])
                 .build();
 
         CoordComponent lootThree= CoordComponent.Builder.config()
@@ -643,7 +643,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootThreeWidth)
                 .setComponentHeight(tfLootThreeHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[2])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[2])
                 .build();
 
         CoordComponent lootFour= CoordComponent.Builder.config()
@@ -652,7 +652,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootFourWidth)
                 .setComponentHeight(tfLootFourHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[3])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[3])
                 .build();
 
         CoordComponent lootFive= CoordComponent.Builder.config()
@@ -661,7 +661,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootFiveWidth)
                 .setComponentHeight(tfLootFiveHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[4])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[4])
                 .build();
 
         CoordComponent lootSix= CoordComponent.Builder.config()
@@ -670,7 +670,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootSixWidth)
                 .setComponentHeight(tfLootSixHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[5])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[5])
                 .build();
 
         CoordComponent lootSeven= CoordComponent.Builder.config()
@@ -679,7 +679,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootSevenWidth)
                 .setComponentHeight(tfLootSevenHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[6])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[6])
                 .build();
 
         CoordComponent lootEight= CoordComponent.Builder.config()
@@ -688,7 +688,7 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfLootEightWidth)
                 .setComponentHeight(tfLootEightHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().LOOT_SLOT_LIST()[7])
+                .setRectangle(Application.getConfig().LOOT_SLOT_LIST()[7])
                 .build();
 
         CoordComponent chat = CoordComponent.Builder.config()
@@ -697,14 +697,14 @@ public class TabSettingsView extends JDialog {
                 .setComponentWidth(tfChatWidth)
                 .setComponentHeight(tfChatHeight)
                 .setVerifier(numericVerifier)
-                .setRectangle(Application.getInstance().CHAT())
+                .setRectangle(Application.getConfig().CHAT())
                 .build();
     }
 
     private void initPm() {
-        rbAutoFish.setSelected(Application.getInstance().PM_AUTOFISH());
-        rbExitGame.setSelected(Application.getInstance().PM_EXIT_GAME());
-        rbNothing.setSelected(Application.getInstance().PM_NOTHING());
+        rbAutoFish.setSelected(Application.getConfig().PM_AUTOFISH());
+        rbExitGame.setSelected(Application.getConfig().PM_EXIT_GAME());
+        rbNothing.setSelected(Application.getConfig().PM_NOTHING());
 
         ButtonGroup pmGroup = new ButtonGroup();
         pmGroup.add(rbAutoFish);
@@ -722,18 +722,18 @@ public class TabSettingsView extends JDialog {
         lRod.setIcon(new ImageIcon(UI.SMALL_PREMIUM));
         lRod.setToolTipText(UIManager.getString("preference.premium.tooltip"));
 
-        tfRodChange.setText(String.valueOf(Application.getInstance().TIME_CHANGE_ROD()));
+        tfRodChange.setText(String.valueOf(Application.getConfig().TIME_CHANGE_ROD()));
         tfRodChange.setInputVerifier(delayVerifier);
         tfRodChange.addMouseListener(new TimeMouseConverter(tfRodChange));
 
-        tfRodCount.setText(String.valueOf(Application.getInstance().COUNT_ROD()));
+        tfRodCount.setText(String.valueOf(Application.getConfig().COUNT_ROD()));
         tfRodCount.setInputVerifier(rodCountVerifier);
 
     }
 
     private void initNotification() {
-        cbTelegram.setSelected(Application.getInstance().TELEGRAM());
-        tfTelegramKey.setText(Application.getInstance().TELEGRAM_KEY());
+        cbTelegram.setSelected(Application.getConfig().TELEGRAM());
+        tfTelegramKey.setText(Application.getConfig().TELEGRAM_KEY());
     }
 
     private void initSlots() {
@@ -751,7 +751,7 @@ public class TabSettingsView extends JDialog {
                 .setKeyComponent(tfFirstSlotKey, slotKeyVerifier)
                 .setDelayComponent(tfFirstSlotDelay, delayPeriodVerifier)
                 .setPeriodComponent(tfFirstSlotPeriod, delayPeriodVerifier)
-                .setHotSlot(Application.getInstance().SLOT_ONE())
+                .setHotSlot(Application.getConfig().SLOT_ONE())
                 .build();
 
         SlotComponent.Builder.config()
@@ -759,7 +759,7 @@ public class TabSettingsView extends JDialog {
                 .setKeyComponent(tfSecondSlotKey, slotKeyVerifier)
                 .setDelayComponent(tfSecondSlotDelay, delayPeriodVerifier)
                 .setPeriodComponent(tfSecondSlotPeriod, delayPeriodVerifier)
-                .setHotSlot(Application.getInstance().SLOT_TWO())
+                .setHotSlot(Application.getConfig().SLOT_TWO())
                 .build();
 
         SlotComponent.Builder.config()
@@ -767,17 +767,17 @@ public class TabSettingsView extends JDialog {
                 .setKeyComponent(tfThirdSlotKey, slotKeyVerifier)
                 .setDelayComponent(tfThirdSlotDelay, delayPeriodVerifier)
                 .setPeriodComponent(tfThirdSlotPeriod, delayPeriodVerifier)
-                .setHotSlot(Application.getInstance().SLOT_THREE())
+                .setHotSlot(Application.getConfig().SLOT_THREE())
                 .build();
     }
 
     private void initLootFilter() {
-        cbFish.setSelected(Application.getInstance().FISH());
-        cbKey.setSelected(Application.getInstance().KEY());
-        cbEvent.setSelected(Application.getInstance().EVENT());
-        cbConfirm.setSelected(Application.getInstance().CONFIRM());
-        cbRock.setSelected(Application.getInstance().ROCK());
-        cbUnknown.setSelected(Application.getInstance().TAKE_UNKNOWN());
+        cbFish.setSelected(Application.getConfig().FISH());
+        cbKey.setSelected(Application.getConfig().KEY());
+        cbEvent.setSelected(Application.getConfig().EVENT());
+        cbConfirm.setSelected(Application.getConfig().CONFIRM());
+        cbRock.setSelected(Application.getConfig().ROCK());
+        cbUnknown.setSelected(Application.getConfig().TAKE_UNKNOWN());
     }
 
     private void initTask() {
@@ -790,21 +790,21 @@ public class TabSettingsView extends JDialog {
             component.setEnabled(Application.getUser().isPremium());
         }
 
-        cbBeer.setSelected(Application.getInstance().SLOT_BEER().isActive());
-        cbRepeatWork.setSelected(Application.getInstance().BEER_TOUCHS()[2].isActive());
+        cbBeer.setSelected(Application.getConfig().SLOT_BEER().isActive());
+        cbRepeatWork.setSelected(Application.getConfig().BEER_TOUCHS()[2].isActive());
         cbRepeatWork.setToolTipText(UIManager.getString("preference.label.beer_repeat.tooltip"));
 
         lBeerKey.setToolTipText(UIManager.getString("preference.label.beer_key.tooltip"));
-        beerKey.setText(Application.getInstance().SLOT_BEER().getKey());
+        beerKey.setText(Application.getConfig().SLOT_BEER().getKey());
         beerKey.setInputVerifier(slotKeyVerifier);
 
         lBeerPeriod.setToolTipText(UIManager.getString("preference.label.beer_period.tooltip"));
 
-        beerPeriodFrom.setText(String.valueOf(Application.getInstance().SLOT_BEER().getPeriod()));
+        beerPeriodFrom.setText(String.valueOf(Application.getConfig().SLOT_BEER().getPeriod()));
         beerPeriodFrom.setInputVerifier(delayPeriodVerifier);
         beerPeriodFrom.addMouseListener(new TimeMouseConverter(beerPeriodFrom));
 
-        beerPeriodTo.setText(String.valueOf(Application.getInstance().SLOT_BEER().getRandomPeriod()));
+        beerPeriodTo.setText(String.valueOf(Application.getConfig().SLOT_BEER().getRandomPeriod()));
         beerPeriodTo.setInputVerifier(delayPeriodVerifier);
         beerPeriodTo.addMouseListener(new TimeMouseConverter(beerPeriodTo));
     }
@@ -812,15 +812,15 @@ public class TabSettingsView extends JDialog {
     private void initAutoEnd() {
 
         lIdeaPause.setIcon(new ImageIcon(UI.IMG_IDEA));
-        cbPause.setSelected(Application.getInstance().TASK_PAUSE().isActive());
-        tfPauseDelayFrom.setText(String.valueOf(Application.getInstance().TASK_PAUSE().getDelay()));
+        cbPause.setSelected(Application.getConfig().TASK_PAUSE().isActive());
+        tfPauseDelayFrom.setText(String.valueOf(Application.getConfig().TASK_PAUSE().getDelay()));
         tfPauseDelayFrom.addMouseListener(new TimeMouseConverter(tfPauseDelayFrom));
-        tfPauseDelayTo.setText(String.valueOf(Application.getInstance().TASK_PAUSE().getRandomDelay()));
+        tfPauseDelayTo.setText(String.valueOf(Application.getConfig().TASK_PAUSE().getRandomDelay()));
         tfPauseDelayTo.addMouseListener(new TimeMouseConverter(tfPauseDelayTo));
 
-        tfPauseDowntimeFrom.setText(String.valueOf(Application.getInstance().TASK_PAUSE().getPauseFrom()));
+        tfPauseDowntimeFrom.setText(String.valueOf(Application.getConfig().TASK_PAUSE().getPauseFrom()));
         tfPauseDowntimeFrom.addMouseListener(new TimeMouseConverter(tfPauseDowntimeFrom));
-        tfPauseDowntimeTo.setText(String.valueOf(Application.getInstance().TASK_PAUSE().getPauseTo()));
+        tfPauseDowntimeTo.setText(String.valueOf(Application.getConfig().TASK_PAUSE().getPauseTo()));
         tfPauseDowntimeTo.addMouseListener(new TimeMouseConverter(tfPauseDowntimeTo));
 
         lTimer.setIcon(new ImageIcon(UI.SMALL_PREMIUM));
@@ -831,13 +831,13 @@ public class TabSettingsView extends JDialog {
         }
 
         lIdeaDeferredStart.setIcon(new ImageIcon(UI.IMG_IDEA));
-        cbDeferredStart.setSelected(Application.getInstance().TASK_START().isActive());
-        tfDeferredStart.setText(String.valueOf(Application.getInstance().TASK_START().getDelay()));
+        cbDeferredStart.setSelected(Application.getConfig().TASK_START().isActive());
+        tfDeferredStart.setText(String.valueOf(Application.getConfig().TASK_START().getDelay()));
         tfDeferredStart.addMouseListener(new TimeMouseConverter(tfDeferredStart));
         tfDeferredStart.setInputVerifier(delayPeriodVerifier);
 
         lIdeaStopBot.setIcon(new ImageIcon(UI.IMG_IDEA));
-        cbStopBot.setSelected(Application.getInstance().TASK_STOP().isActive());
+        cbStopBot.setSelected(Application.getConfig().TASK_STOP().isActive());
         cbStopBot.addItemListener(e -> {
             JCheckBox item = (JCheckBox) e.getItem();
             if (item.isSelected()) {
@@ -845,19 +845,19 @@ public class TabSettingsView extends JDialog {
             }
         });
 
-        tfStopBot.setText(String.valueOf(Application.getInstance().TASK_STOP().getDelay()));
+        tfStopBot.setText(String.valueOf(Application.getConfig().TASK_STOP().getDelay()));
         tfStopBot.addMouseListener(new TimeMouseConverter(tfStopBot));
         tfStopBot.setInputVerifier(delayPeriodVerifier);
 
         lIdeaExitGame.setIcon(new ImageIcon(UI.IMG_IDEA));
-        cbExitGame.setSelected(Application.getInstance().TASK_EXIT_GAME().isActive());
+        cbExitGame.setSelected(Application.getConfig().TASK_EXIT_GAME().isActive());
         cbExitGame.addItemListener(e -> {
             JCheckBox item = (JCheckBox) e.getItem();
             if (item.isSelected()) {
                 cbStopBot.setSelected(false);
             }
         });
-        tfExitGame.setText(String.valueOf(Application.getInstance().TASK_EXIT_GAME().getDelay()));
+        tfExitGame.setText(String.valueOf(Application.getConfig().TASK_EXIT_GAME().getDelay()));
         tfExitGame.addMouseListener(new TimeMouseConverter(tfExitGame));
         tfExitGame.setInputVerifier(delayPeriodVerifier);
 

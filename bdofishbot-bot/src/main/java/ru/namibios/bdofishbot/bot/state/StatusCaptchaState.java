@@ -21,9 +21,9 @@ public class StatusCaptchaState extends State{
 	StatusCaptchaState(FishBot fishBot, String name) {
 
 		super(fishBot);
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_STATUS_KAPCHA();
-		this.afterStart = Application.getInstance().DELAY_AFTER_STATUS_KAPCHA();
-		this.overflow = Application.getInstance().STATE_STATUS_CAPTCHA_OVERFLOW();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_STATUS_KAPCHA();
+		this.afterStart = Application.getConfig().DELAY_AFTER_STATUS_KAPCHA();
+		this.overflow = Application.getConfig().STATE_STATUS_CAPTCHA_OVERFLOW();
 
 		this.filename = name;
 

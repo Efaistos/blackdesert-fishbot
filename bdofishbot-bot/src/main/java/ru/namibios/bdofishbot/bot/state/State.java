@@ -34,7 +34,7 @@ public abstract class State {
 		this.afterStart = afterStart;
 	}
 
-	int overflow = Application.getInstance().STATE_OVERFLOW();
+	int overflow = Application.getConfig().STATE_OVERFLOW();
 	private int step = 0;
 
 	void overflow() {
@@ -46,25 +46,25 @@ public abstract class State {
 
 	private boolean isActiveClient(){
 
-		WinDef.HWND windowGame = WinAPI.findWindow(Application.getInstance().GAME_TITLE());
+		WinDef.HWND windowGame = WinAPI.findWindow(Application.getConfig().GAME_TITLE());
 		if (windowGame == null) {
 
 			LOG.info("Game client crash");
 
-			if (Application.getInstance().CRASH_EXIT_BOT()) {
+			if (Application.getConfig().CRASH_EXIT_BOT()) {
 
 				fishBot.notifyUser(Message.GAME_CLIENT_CRASH_CLOSE_BOT);
 				Application.closeBot(Application.CODE_GAME_CLIENT_CRASH);
 			}
 
-			if (Application.getInstance().CRASH_STOP_BOT()) {
+			if (Application.getConfig().CRASH_STOP_BOT()) {
 				LOG.info("Stop bot..");
 
 				fishBot.notifyUser(Message.GAME_CLIENT_CRASH_STOP_BOT);
 				fishBot.setRunned(false);
 			}
 
-			if (Application.getInstance().CRASH_SHUTDOWN_PC()) {
+			if (Application.getConfig().CRASH_SHUTDOWN_PC()) {
 				fishBot.notifyUser(Message.GAME_CLIENT_CRASH_SHUTDOWN_PC);
 				Application.shutdownPc();
 			}

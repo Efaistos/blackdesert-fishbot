@@ -18,7 +18,7 @@ public class PaletteParser {
 
     private MatrixTemplate[] collectionTemplate;
 
-    private double coefIdentification = Application.getInstance().PALETTE_COEF_IDENTITY();
+    private double coefIdentification = Application.getConfig().PALETTE_COEF_IDENTITY();
 
     private int row;
     private int column;

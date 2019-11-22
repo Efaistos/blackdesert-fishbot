@@ -53,21 +53,21 @@ public class FishBot {
     public FishBot(boolean start) {
 
         List<Slot> slots = Arrays.asList(
-                new Slot(Application.getInstance().SLOT_ONE()),
-                new Slot(Application.getInstance().SLOT_TWO()),
-                new Slot(Application.getInstance().SLOT_THREE()),
-                new Slot(Application.getInstance().SLOT_BEER()),
-				new Slot(Application.getInstance().TASK_STOP()),
-				new Slot(Application.getInstance().TASK_EXIT_GAME())
+                new Slot(Application.getConfig().SLOT_ONE()),
+                new Slot(Application.getConfig().SLOT_TWO()),
+                new Slot(Application.getConfig().SLOT_THREE()),
+                new Slot(Application.getConfig().SLOT_BEER()),
+				new Slot(Application.getConfig().TASK_STOP()),
+				new Slot(Application.getConfig().TASK_EXIT_GAME())
         );
 
 		this.httpService = new HttpService();
 
         this.slotService = new SlotService(slots);
 
-        this.rodService = new RodService(Application.getInstance().COUNT_ROD());
+        this.rodService = new RodService(Application.getConfig().COUNT_ROD());
 
-		switch (Application.getInstance().INPUT_MODE()) {
+		switch (Application.getConfig().INPUT_MODE()) {
 			case ARDUINO:
 				this.inputService = new ArduinoService();
 				break;
@@ -85,7 +85,7 @@ public class FishBot {
 		this.state = new UseSlotState(this);
 
 		this.timer = new Timer();
-		this.pauseService = new PauseService(Application.getInstance().TASK_PAUSE());
+		this.pauseService = new PauseService(Application.getConfig().TASK_PAUSE());
 
 	}
 
@@ -121,7 +121,7 @@ public class FishBot {
 
 	public void notifyUser(String message){
 			
-		if(Application.getInstance().TELEGRAM()) {
+		if(Application.getConfig().TELEGRAM()) {
             LOG.info("Send telegram notification.");
 			Notification telegram = new TelegramNotification(message);
 			telegram.notifyUser();

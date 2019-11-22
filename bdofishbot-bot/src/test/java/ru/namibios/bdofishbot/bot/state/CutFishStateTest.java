@@ -57,12 +57,12 @@ public class CutFishStateTest {
     public void testChangeRod() throws IOException {
 
         Mockito.when(inputService.send(any(Line.class))).thenReturn(false);
-        Mockito.when(timer.isOver(Application.getInstance().TIME_CHANGE_ROD())).thenReturn(true);
+        Mockito.when(timer.isOver(Application.getConfig().TIME_CHANGE_ROD())).thenReturn(true);
 
         cutFishState.onStep();
 
         Mockito.verify(inputService).send(isA(Line.class));
-        Mockito.verify(timer).isOver(Application.getInstance().TIME_CHANGE_ROD());
+        Mockito.verify(timer).isOver(Application.getConfig().TIME_CHANGE_ROD());
         Mockito.verify(fishBot).setState(isA(ChangeRodState.class));
 
     }

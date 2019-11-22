@@ -13,8 +13,8 @@ public class CutFishState extends State {
 	CutFishState(FishBot fishBot) {
 		super(fishBot);
 		
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_CUT_FISH();
-		this.afterStart = Application.getInstance().DELAY_AFTER_CUT_FISH();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_CUT_FISH();
+		this.afterStart = Application.getConfig().DELAY_AFTER_CUT_FISH();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class CutFishState extends State {
 				LOG.info("Cut the fish...");
 				fishBot.setState(new StatusCutState(fishBot));
 
-			} else if (timer.isOver(Application.getInstance().TIME_CHANGE_ROD())) {
+			} else if (timer.isOver(Application.getConfig().TIME_CHANGE_ROD())) {
 				LOG.info("Waiting time for fish is out..");
 				fishBot.setState(new ChangeRodState(fishBot));
 			}

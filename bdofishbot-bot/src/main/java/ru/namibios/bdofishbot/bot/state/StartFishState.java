@@ -16,8 +16,8 @@ public class StartFishState extends State{
 	StartFishState(FishBot fishBot) {
 		super(fishBot);
 		
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_START();
-		this.afterStart = Application.getInstance().DELAY_AFTER_START();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_START();
+		this.afterStart = Application.getConfig().DELAY_AFTER_START();
 		this.pauseService = fishBot.getPauseService();
 	}
 
@@ -31,7 +31,7 @@ public class StartFishState extends State{
 				pauseService.rest();
 			}
 
-			if (Application.getInstance().SKIP_CALENDAR()) {
+			if (Application.getConfig().SKIP_CALENDAR()) {
 				inputService.send(ShortCommand.SKIP_CALENDAR);
 			}
 

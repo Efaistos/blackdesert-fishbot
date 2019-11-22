@@ -82,8 +82,8 @@ public class HttpService {
         Header session = new BasicHeader("USER_SESSION", Application.SESSION);
 
         RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(Application.getInstance().HTTP_DEFAULT_CONNECT_TIMEOUT())
-                .setSocketTimeout(Application.getInstance().HTTP_DEFAULT_SOCKET_TIMEOUT())
+                .setConnectTimeout(Application.getConfig().HTTP_DEFAULT_CONNECT_TIMEOUT())
+                .setSocketTimeout(Application.getConfig().HTTP_DEFAULT_SOCKET_TIMEOUT())
                 .build();
 
         httpClient = HttpClients.custom()
@@ -123,7 +123,7 @@ public class HttpService {
 
     public void sendTelegramMessage(String key, String message) throws IOException{
 
-        HttpPost post = Builder.config().setUrl(String.format(TELEGRAM_MESSAGE_URL, Application.getInstance().URL_SERVER_HTTPS()))
+        HttpPost post = Builder.config().setUrl(String.format(TELEGRAM_MESSAGE_URL, Application.getConfig().URL_SERVER_HTTPS()))
                 .setParameter(new BasicNameValuePair("key", key))
                 .setParameter(new BasicNameValuePair("message", message))
                 .build();
@@ -134,7 +134,7 @@ public class HttpService {
     }
 
     public void sendTelegramPhoto(String key, byte[] photo) throws IOException{
-        HttpPost post = new HttpPost(String.format(TELEGRAM_PHOTO_URL, Application.getInstance().URL_SERVER_HTTPS()));
+        HttpPost post = new HttpPost(String.format(TELEGRAM_PHOTO_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -167,7 +167,7 @@ public class HttpService {
 
 	public String parseByteCaptcha(String name,  byte[] captcha) throws IOException {
 
-		HttpPost post = new HttpPost(String.format(BYTE_CAPTCHA_URL, Application.getInstance().URL_SERVER_HTTPS()));
+		HttpPost post = new HttpPost(String.format(BYTE_CAPTCHA_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -188,7 +188,7 @@ public class HttpService {
             HttpClientContext context = new HttpClientContext();
 
             context.setRequestConfig(RequestConfig.custom()
-                    .setSocketTimeout(Application.getInstance().HTTP_CAPTCHA_SOCKET_TIMEOUT())
+                    .setSocketTimeout(Application.getConfig().HTTP_CAPTCHA_SOCKET_TIMEOUT())
                     .build());
 
             httpResponse = httpClient.execute(post, context);
@@ -228,7 +228,7 @@ public class HttpService {
 
 	public void markFail(String name) throws IOException{
 
-		HttpPost post = new HttpPost(String.format(MARK_FAILURE_STATUS_URL, Application.getInstance().URL_SERVER_HTTPS()));
+		HttpPost post = new HttpPost(String.format(MARK_FAILURE_STATUS_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
 		ArrayList<BasicNameValuePair> postParameters = new ArrayList<>();
 		postParameters.add(new BasicNameValuePair("USER", JSON.getInstance().writeValueAsString(Application.getUser())));
@@ -243,7 +243,7 @@ public class HttpService {
 
 	public String getInfo() throws IOException {
 
-		HttpGet get = new HttpGet(String.format(INFO_URL, Application.getInstance().URL_SERVER_HTTPS()));
+		HttpGet get = new HttpGet(String.format(INFO_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
         HttpResponse httpResponse = httpClient.execute(get);
 		HttpEntity entity = httpResponse.getEntity();
@@ -253,7 +253,7 @@ public class HttpService {
 
     public User getUserStatus(User user) throws IOException, URISyntaxException {
 
-        HttpGet get = new HttpGet(String.format(USER_STATUS_URL, Application.getInstance().URL_SERVER_HTTPS()));
+        HttpGet get = new HttpGet(String.format(USER_STATUS_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
         URI uri = new URIBuilder(get.getURI())
                 .addParameter("USER", JSON.getInstance().writeValueAsString(user))
@@ -271,7 +271,7 @@ public class HttpService {
 
     public void close(int status) throws IOException {
 
-        HttpPost post = new HttpPost(String.format(CLOSE_BOT, Application.getInstance().URL_SERVER_HTTPS()));
+        HttpPost post = new HttpPost(String.format(CLOSE_BOT, Application.getConfig().URL_SERVER_HTTPS()));
 
         ArrayList<BasicNameValuePair> postParameters = new ArrayList<>();
         postParameters.add(new BasicNameValuePair("USER", JSON.getInstance().writeValueAsString(Application.getUser())));
@@ -287,7 +287,7 @@ public class HttpService {
 
 	public void call(String name) throws IOException {
 
-		HttpPost post = Builder.config().setUrl(String.format(CALL_URL, Application.getInstance().URL_SERVER_HTTPS()))
+		HttpPost post = Builder.config().setUrl(String.format(CALL_URL, Application.getConfig().URL_SERVER_HTTPS()))
 				.setParameter(new BasicNameValuePair("USER", JSON.getInstance().writeValueAsString(Application.getUser())))
 				.setParameter(new BasicNameValuePair("NAME", name))
 				.build();
@@ -298,7 +298,7 @@ public class HttpService {
 
     public void sync(File file) throws IOException {
 
-        HttpPost post = new HttpPost(String.format(SYNC_URL, Application.getInstance().URL_SERVER_HTTPS()));
+        HttpPost post = new HttpPost(String.format(SYNC_URL, Application.getConfig().URL_SERVER_HTTPS()));
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);

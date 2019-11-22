@@ -88,7 +88,7 @@ public class EmulationService implements InputService{
         useSlot(command);
         DelayUtils.delay(TWO_SECONDS);
 
-        clickSequence(Application.getInstance().BEER_TOUCHS());
+        clickSequence(Application.getConfig().BEER_TOUCHS());
 
         emulationInput.sendInput(KeyEvent.VK_ESCAPE);
     }
@@ -152,7 +152,7 @@ public class EmulationService implements InputService{
         emulationInput.sendInput(KeyEvent.VK_ESCAPE);
         DelayUtils.delay(200);
 
-        clickSequence(Application.getInstance().EXIT_TOUCHS());
+        clickSequence(Application.getConfig().EXIT_TOUCHS());
     }
 
     private void skipCalendar() {

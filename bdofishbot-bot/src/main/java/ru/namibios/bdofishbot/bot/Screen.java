@@ -99,7 +99,7 @@ public class Screen {
 		logger.info("Cleaning captcha...");
 		int cnt = 0;
 		while(cnt < iteration){
-			BufferedImage noiseImage = new Screen(Application.getInstance().CAPTCHA()).getScreenShot();
+			BufferedImage noiseImage = new Screen(Application.getConfig().CAPTCHA()).getScreenShot();
 			noise.addNoise(noiseImage);
 			cnt++;
 		}
@@ -137,7 +137,7 @@ public class Screen {
 	}
 
 	private void saveToStore(String name, String folder){
-		if (Application.getInstance().STORED_CAPTCHA()){
+		if (Application.getConfig().STORED_CAPTCHA()){
 			try {
 				ImageIO.write(screenShot, "jpg", new File(folder + name + ".jpg"));
 			} catch (IOException e) {

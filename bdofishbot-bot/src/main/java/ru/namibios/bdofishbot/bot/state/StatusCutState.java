@@ -17,9 +17,9 @@ public class StatusCutState extends State{
 	StatusCutState(FishBot fishBot) {
 
 		super(fishBot);
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_STATUS_CUT();
-		this.afterStart = Application.getInstance().DELAY_AFTER_STATUS_CUT();
-		this.overflow = Application.getInstance().STATE_CUT_OVERFLOW();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_STATUS_CUT();
+		this.afterStart = Application.getConfig().DELAY_AFTER_STATUS_CUT();
+		this.overflow = Application.getConfig().STATE_CUT_OVERFLOW();
 
 		this.statusService = new StatusService<>();
 

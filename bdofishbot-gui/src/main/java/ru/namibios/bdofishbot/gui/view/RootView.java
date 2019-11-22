@@ -83,7 +83,7 @@ public class RootView extends JFrame {
 
         cbWorkMode.setEnabled(Application.getUser().isPremium());
         cbWorkMode.setToolTipText(UIManager.getString("rootview.mode.tooltip"));
-        cbWorkMode.addItemListener(e -> Application.getInstance().setProperty("bot.mode", e.getItem().toString()));
+        cbWorkMode.addItemListener(e -> Application.getConfig().setProperty("bot.mode", e.getItem().toString()));
 
         Arrays.stream(Mode.values()).forEach(mode -> cbWorkMode.addItem(mode));
 
@@ -113,7 +113,7 @@ public class RootView extends JFrame {
 
         JMenuItem payInfo = new JMenuItem(UIManager.getString("rootview.menu.premium.payinfo"));
         payInfo.setIcon(new ImageIcon(SMALL_PAYMENT));
-        payInfo.addActionListener((e) -> ExecUtils.openUri(String.format(UIManager.getString("rootview.menu.premium.payinfo.url"), Application.getInstance().URL_SERVER_HTTPS())));
+        payInfo.addActionListener((e) -> ExecUtils.openUri(String.format(UIManager.getString("rootview.menu.premium.payinfo.url"), Application.getConfig().URL_SERVER_HTTPS())));
         premium.add(payInfo);
 
         JMenu help = new JMenu(UIManager.getString("rootview.menu.help"));

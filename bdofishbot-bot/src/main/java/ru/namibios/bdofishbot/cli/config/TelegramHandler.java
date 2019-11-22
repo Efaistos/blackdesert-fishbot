@@ -39,7 +39,7 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
 
         RemoteMessage msg = new RemoteMessage();
         msg.setHash(Application.getUser().getHash());
-        msg.setKey(Application.getInstance().TELEGRAM_KEY());
+        msg.setKey(Application.getConfig().TELEGRAM_KEY());
 
         session.send("/app/tg_bot", msg);
     }
@@ -72,8 +72,8 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
 
                     try {
 
-                        BufferedImage screen = Screen.getScreen(Application.getInstance().FULL_SCREEN());
-                        httpService.sendTelegramPhoto(Application.getInstance().TELEGRAM_KEY(), ImageUtils.imageToBytes(screen));
+                        BufferedImage screen = Screen.getScreen(Application.getConfig().FULL_SCREEN());
+                        httpService.sendTelegramPhoto(Application.getConfig().TELEGRAM_KEY(), ImageUtils.imageToBytes(screen));
 
                     } catch (IOException e) {
                         LOG.error(ExceptionUtils.getString(e));
@@ -88,7 +88,7 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
 
                     try {
 
-                        httpService.sendTelegramMessage(Application.getInstance().TELEGRAM_KEY(), "Bot starting..");
+                        httpService.sendTelegramMessage(Application.getConfig().TELEGRAM_KEY(), "Bot starting..");
 
                     } catch (IOException e) {
                         LOG.error(ExceptionUtils.getString(e));
@@ -103,7 +103,7 @@ public class TelegramHandler extends StompSessionHandlerAdapter {
 
                     try {
 
-                        httpService.sendTelegramMessage(Application.getInstance().TELEGRAM_KEY(), "Bot stopping..");
+                        httpService.sendTelegramMessage(Application.getConfig().TELEGRAM_KEY(), "Bot stopping..");
 
                     } catch (IOException e) {
                         LOG.error(ExceptionUtils.getString(e));

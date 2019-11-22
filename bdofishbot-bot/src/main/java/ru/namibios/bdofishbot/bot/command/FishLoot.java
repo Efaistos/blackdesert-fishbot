@@ -37,7 +37,7 @@ public class FishLoot implements Command{
 	public FishLoot() {
 		LOG.info("Init filter");
 
-		Rectangle[] rectangles = Application.getInstance().LOOT_SLOT_LIST();
+		Rectangle[] rectangles = Application.getConfig().LOOT_SLOT_LIST();
 
         List<Screen> collect = Arrays.stream(rectangles)
                 .map(this::toScreen)
@@ -86,24 +86,24 @@ public class FishLoot implements Command{
 
 	private void saveLoot(String[] arrayLoots){
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_FILTER_LOOT()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_FILTER_LOOT()) {
 			try {
-				Screen screen = new Screen(Application.getInstance().FULL_SCREEN(), false);
+				Screen screen = new Screen(Application.getConfig().FULL_SCREEN(), false);
 				screen.saveImage(Path.DEBUG_FILTERLOOT);
 			} catch (AWTException e) {
 				LOG.error(ExceptionUtils.getString(e));
 			}
 		}
 
-		if (Application.getInstance().DEBUG_SCREEN() || Application.getInstance().DEBUG_FILTER_LOOT()) {
+		if (Application.getConfig().DEBUG_SCREEN() || Application.getConfig().DEBUG_FILTER_LOOT()) {
 			screens.forEach(screen -> screen.saveImage(Path.DEBUG_FILTERLOOT));
 		}
 
-		if(Application.getInstance().SAVE_UNSORT()) {
+		if(Application.getConfig().SAVE_UNSORT()) {
 			screens.forEach(screen -> screen.saveImage(Path.LOOT_UNSORT));
 		}
 
-		if (Application.getInstance().SAVE_UNKNOWN()) {
+		if (Application.getConfig().SAVE_UNKNOWN()) {
 			for (int i = 0; i < arrayLoots.length; i++) {
 				if (arrayLoots[i].equals(UNKNOWN_INDEX)) {
 					screens.get(i).saveImage(Path.LOOT_UNKNOWN);
@@ -120,7 +120,7 @@ public class FishLoot implements Command{
 
 		saveLoot(arrayLoots);
 
-		boolean isTakeUnknown = Application.getInstance().TAKE_UNKNOWN();
+		boolean isTakeUnknown = Application.getConfig().TAKE_UNKNOWN();
 		Looter looter = new Looter(arrayLoots, isTakeUnknown);
 
 		if(looter.isTakeAll()) {
@@ -139,7 +139,7 @@ public class FishLoot implements Command{
             for(LootType type : looter.getLootTypeList()) {
                 if(type.isOk() || type.isConfirm()) {
                     int index = type.getIndex();
-                    Touch touch = Application.getInstance().LOOT_TOUCH()[index];
+                    Touch touch = Application.getConfig().LOOT_TOUCH()[index];
                     command+= type.isOk() ? touch.toCommandLoot() : touch.toCommandConfirmLoot();
                 }
             }

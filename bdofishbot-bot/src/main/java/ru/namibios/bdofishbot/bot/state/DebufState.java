@@ -60,11 +60,11 @@ public class DebufState extends State {
                 Slot slot;
                 switch (debuf) {
                     case DAY:
-                        slot = new Slot(Application.getInstance().SLOT_DEBUF_DESERT_DAY());
+                        slot = new Slot(Application.getConfig().SLOT_DEBUF_DESERT_DAY());
                         break;
 
                     case NIGHT:
-                        slot = new Slot(Application.getInstance().SLOT_DEBUF_DESERT_NIGHT());
+                        slot = new Slot(Application.getConfig().SLOT_DEBUF_DESERT_NIGHT());
                         break;
 
                     default:

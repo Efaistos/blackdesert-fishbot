@@ -35,7 +35,7 @@ public class Bot extends Thread{
 
 		LOG.info("Start...");
 
-		WinDef.HWND windowGame = WinAPI.findWindow(Application.getInstance().GAME_TITLE());
+		WinDef.HWND windowGame = WinAPI.findWindow(Application.getConfig().GAME_TITLE());
 		if (windowGame == null) {
 			LOG.info("The game is not running");
 			Application.closeBot(Application.CODE_GAME_NOT_RUNNING);
@@ -46,7 +46,7 @@ public class Bot extends Thread{
 
 		DelayUtils.delay(3000);
 
-		switch (Application.getInstance().MODE()) {
+		switch (Application.getConfig().MODE()) {
 			case FISHING:
 				LOG.info("Bot started on FISHING mode..");
 				fishBot.setState(new DeferredStartState(fishBot));

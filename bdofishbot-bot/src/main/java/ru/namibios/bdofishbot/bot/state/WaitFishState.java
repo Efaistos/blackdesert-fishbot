@@ -21,8 +21,8 @@ public class WaitFishState extends State {
 	WaitFishState(FishBot fishBot) {
 		super(fishBot);
 
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_WAIT_FISH();
-		this.afterStart = Application.getInstance().DELAY_AFTER_WAIT_FISH();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_WAIT_FISH();
+		this.afterStart = Application.getConfig().DELAY_AFTER_WAIT_FISH();
 
 		this.httpService = fishBot.getHttpService();
 
@@ -44,7 +44,7 @@ public class WaitFishState extends State {
 				switch (task) {
 
 					case UPTIME:
-						httpService.sendTelegramMessage(Application.getInstance().TELEGRAM_KEY(), fishBot.getFormatUptime("HH:mm:ss"));
+						httpService.sendTelegramMessage(Application.getConfig().TELEGRAM_KEY(), fishBot.getFormatUptime("HH:mm:ss"));
 						break;
 
 					case SKIP_CALENDAR:
@@ -53,7 +53,7 @@ public class WaitFishState extends State {
 
 					case INVENTORY:
 						inputService.send(ShortCommand.INVENTORY);
-						httpService.sendTelegramPhoto(Application.getInstance().TELEGRAM_KEY(), ImageUtils.imageToBytes(Screen.getScreen(Application.getInstance().INVENTORY())));
+						httpService.sendTelegramPhoto(Application.getConfig().TELEGRAM_KEY(), ImageUtils.imageToBytes(Screen.getScreen(Application.getConfig().INVENTORY())));
 						inputService.send(ShortCommand.INVENTORY);
 						break;
 
@@ -81,7 +81,7 @@ public class WaitFishState extends State {
 				LOG.info("Fish detected..");
 				fishBot.setState(new CutFishState(fishBot));
 
-			} else if (timer.isOver(Application.getInstance().TIME_CHANGE_ROD())) {
+			} else if (timer.isOver(Application.getConfig().TIME_CHANGE_ROD())) {
 				LOG.info("Waiting time for fish is out..");
 				fishBot.setState(new ChangeRodState(fishBot));
 			}

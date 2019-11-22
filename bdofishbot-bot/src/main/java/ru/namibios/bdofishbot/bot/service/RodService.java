@@ -29,23 +29,23 @@ public class RodService {
 
         this.rods = new ArrayList<>();
 
-        int x = Application.getInstance().ROD_START_X();
-        int y = Application.getInstance().ROD_START_Y();
+        int x = Application.getConfig().ROD_START_X();
+        int y = Application.getConfig().ROD_START_Y();
 
         for (int i = 0; i < count; i++) {
             rods.add(new Touch(x, y));
 
-            x += Application.getInstance().ROD_DX();
+            x += Application.getConfig().ROD_DX();
             if ((i > 0) && (((i + 1) % LENGTH_ROW_INVENTORY) == 0)) {
-                x = Application.getInstance().ROD_START_X();
-                y += Application.getInstance().ROD_DY();
+                x = Application.getConfig().ROD_START_X();
+                y += Application.getConfig().ROD_DY();
             }
 
         }
     }
 
     public int getCountAvailableRods(){
-        return Application.getInstance().COUNT_ROD() - current;
+        return Application.getConfig().COUNT_ROD() - current;
     }
 
     public boolean hasNext(){

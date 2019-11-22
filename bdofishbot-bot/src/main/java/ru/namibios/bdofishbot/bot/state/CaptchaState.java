@@ -19,8 +19,8 @@ public class CaptchaState extends State {
     CaptchaState(FishBot fishBot) {
 		super(fishBot);
 		
-		this.beforeStart = Application.getInstance().DELAY_BEFORE_KAPCHA();
-		this.afterStart = Application.getInstance().DELAY_AFTER_KAPCHA();
+		this.beforeStart = Application.getConfig().DELAY_BEFORE_KAPCHA();
+		this.afterStart = Application.getConfig().DELAY_AFTER_KAPCHA();
 
         this.name = new Date().getTime() + "_" + Application.getUser().getHash();
         this.captcha = new Captcha(name);

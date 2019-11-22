@@ -38,19 +38,19 @@ public class Launcher {
         Application.check();
         Application.getUser();
 
-        if (Application.getInstance().TELEGRAM()) {
+        if (Application.getConfig().TELEGRAM()) {
             WebSocketClient client = new StandardWebSocketClient();
             WebSocketStompClient stompClient = new WebSocketStompClient(client);
 
             stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
             StompSessionHandler sessionHandler = new TelegramHandler(botService);
-            stompClient.connect(Application.getInstance().URL_WS(), sessionHandler);
+            stompClient.connect(Application.getConfig().URL_WS(), sessionHandler);
         }
 
         try {
 
-            UIManager.setLookAndFeel(Application.getInstance().THEME());
+            UIManager.setLookAndFeel(Application.getConfig().THEME());
 
         } catch (Exception e) {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

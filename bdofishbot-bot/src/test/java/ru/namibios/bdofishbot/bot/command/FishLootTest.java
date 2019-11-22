@@ -16,12 +16,12 @@ public class FishLootTest {
 	
 	@Before
 	public void init() {
-		Application.getInstance();
-		Application.getInstance().setProperty("bot.loot.rock", "true");
-		Application.getInstance().setProperty("bot.loot.key",  "true");
-		Application.getInstance().setProperty("bot.loot.fish", "true");
-		Application.getInstance().setProperty("bot.loot.event","true");
-		Application.getInstance().setProperty("bot.loot.confirm","true");
+		Application.getConfig();
+		Application.getConfig().setProperty("bot.loot.rock", "true");
+		Application.getConfig().setProperty("bot.loot.key",  "true");
+		Application.getConfig().setProperty("bot.loot.fish", "true");
+		Application.getConfig().setProperty("bot.loot.event","true");
+		Application.getConfig().setProperty("bot.loot.confirm","true");
 
 	}
 
@@ -82,8 +82,8 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, confirm, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot() +
-                Application.getInstance().LOOT_TOUCH()[1].toCommandConfirmLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot() +
+                Application.getConfig().LOOT_TOUCH()[1].toCommandConfirmLoot(), key);
     }
 
     @Test
@@ -91,8 +91,8 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(confirm, trash, ok);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandConfirmLoot() +
-                Application.getInstance().LOOT_TOUCH()[2].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandConfirmLoot() +
+                Application.getConfig().LOOT_TOUCH()[2].toCommandLoot(), key);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, trash, empty);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot(), key);
     }
 	
 	@Test
@@ -108,7 +108,7 @@ public class FishLootTest {
 		FishLoot fishLoot = new FishLoot(trash, ok, empty);
 		String key = fishLoot.getKey();
 		
-		assertEquals(Application.getInstance().LOOT_TOUCH()[1].toCommandLoot(), key);
+		assertEquals(Application.getConfig().LOOT_TOUCH()[1].toCommandLoot(), key);
 	}
 
     @Test
@@ -116,8 +116,8 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, ok, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot()
-                + Application.getInstance().LOOT_TOUCH()[1].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot()
+                + Application.getConfig().LOOT_TOUCH()[1].toCommandLoot(), key);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, trash, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot(), key);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(trash, ok, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[1].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[1].toCommandLoot(), key);
     }
 
     @Test
@@ -141,7 +141,7 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(trash, trash, ok);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[2].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[2].toCommandLoot(), key);
     }
 
     @Test
@@ -149,8 +149,8 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, trash, ok);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot() +
-                Application.getInstance().LOOT_TOUCH()[2].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot() +
+                Application.getConfig().LOOT_TOUCH()[2].toCommandLoot(), key);
     }
 
     @Test
@@ -158,8 +158,8 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(trash, ok, ok);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[1].toCommandLoot() +
-                Application.getInstance().LOOT_TOUCH()[2].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[1].toCommandLoot() +
+                Application.getConfig().LOOT_TOUCH()[2].toCommandLoot(), key);
     }
 
     @Test
@@ -167,10 +167,10 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(ok, trash, ok, trash, ok, trash, ok, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandLoot() +
-                Application.getInstance().LOOT_TOUCH()[2].toCommandLoot()+
-                Application.getInstance().LOOT_TOUCH()[4].toCommandLoot()+
-                Application.getInstance().LOOT_TOUCH()[6].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandLoot() +
+                Application.getConfig().LOOT_TOUCH()[2].toCommandLoot()+
+                Application.getConfig().LOOT_TOUCH()[4].toCommandLoot()+
+                Application.getConfig().LOOT_TOUCH()[6].toCommandLoot(), key);
     }
 
     @Test
@@ -178,10 +178,10 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(trash, ok, trash, ok, trash, ok, trash, ok);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[1].toCommandLoot() +
-                Application.getInstance().LOOT_TOUCH()[3].toCommandLoot()+
-                Application.getInstance().LOOT_TOUCH()[5].toCommandLoot()+
-                Application.getInstance().LOOT_TOUCH()[7].toCommandLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[1].toCommandLoot() +
+                Application.getConfig().LOOT_TOUCH()[3].toCommandLoot()+
+                Application.getConfig().LOOT_TOUCH()[5].toCommandLoot()+
+                Application.getConfig().LOOT_TOUCH()[7].toCommandLoot(), key);
     }
 
     @Test
@@ -189,10 +189,10 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(confirm, trash, confirm, trash, confirm, trash, confirm, trash);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[0].toCommandConfirmLoot() +
-                Application.getInstance().LOOT_TOUCH()[2].toCommandConfirmLoot()+
-                Application.getInstance().LOOT_TOUCH()[4].toCommandConfirmLoot()+
-                Application.getInstance().LOOT_TOUCH()[6].toCommandConfirmLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[0].toCommandConfirmLoot() +
+                Application.getConfig().LOOT_TOUCH()[2].toCommandConfirmLoot()+
+                Application.getConfig().LOOT_TOUCH()[4].toCommandConfirmLoot()+
+                Application.getConfig().LOOT_TOUCH()[6].toCommandConfirmLoot(), key);
     }
 
     @Test
@@ -200,10 +200,10 @@ public class FishLootTest {
         FishLoot fishLoot = new FishLoot(trash, confirm, trash, confirm, trash, confirm, trash, confirm);
         String key = fishLoot.getKey();
 
-        assertEquals(Application.getInstance().LOOT_TOUCH()[1].toCommandConfirmLoot() +
-                Application.getInstance().LOOT_TOUCH()[3].toCommandConfirmLoot()+
-                Application.getInstance().LOOT_TOUCH()[5].toCommandConfirmLoot()+
-                Application.getInstance().LOOT_TOUCH()[7].toCommandConfirmLoot(), key);
+        assertEquals(Application.getConfig().LOOT_TOUCH()[1].toCommandConfirmLoot() +
+                Application.getConfig().LOOT_TOUCH()[3].toCommandConfirmLoot()+
+                Application.getConfig().LOOT_TOUCH()[5].toCommandConfirmLoot()+
+                Application.getConfig().LOOT_TOUCH()[7].toCommandConfirmLoot(), key);
     }
 
     // --------------------IGNORE ALL--------------------//
